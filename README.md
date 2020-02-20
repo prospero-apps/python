@@ -1,2 +1,2 @@
 # python
-Code from YT videos
+Code from Prospero Coder Blog and YT videos
