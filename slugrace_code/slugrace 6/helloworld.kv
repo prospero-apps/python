@@ -1,0 +1,7 @@
+# File name: helloworld.kv
+
+<Button>:    
+    text: 'Click here'
+    font_size: 50   
+    on_press: self.font_size = 100; self.text = 'pressed'
+    on_release: self.font_size = 50; self.text = 'Click again'
