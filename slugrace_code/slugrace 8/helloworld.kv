@@ -1,0 +1,37 @@
+# File name: helloworld.kv
+
+<MyCustomButton>:
+    size: 120, 40
+    color: .7, .6, .4, 1
+
+<MyCustomWidget>: 
+    TextInput:
+        hint_text: 'Type Something'
+        # The x coordinate of the text input should be equal
+        # to the x coordinate of the whole custom widget (which
+        # fills the whole window). Let's add a 20-pixel offset
+        # to it so that it doesn't cling to the window.
+        # The y coordinate should be relative to the right side
+        # of the custom widget (which is referenced by root).
+        # If you leave root.top, you won't see the text input
+        # widget because its lower side will be on the top
+        # border of the window and the rest of it will be outside
+        # the custom widget and outside the window. This is why 
+        # we have to subtract the text input's height.
+        # Additionally let's subtract 20 to give some more room.
+        pos: root.x + 20, root.top - self.height - 20
+        size: 300, 40
+    MyCustomButton:
+        text: 'Press Me'
+        # The button should be relative to the root's x and y
+        # coordinates. The y coordinate is the one at the bottom
+        # of a widget. We'll add a 20-pixel offset again.
+        pos: root.x + 20, root.y + 20
+    MyCustomButton:
+        text: 'Press Me Too'
+        # The other button will be relative to the right border 
+        # of the custom widget. Again, we have to subtract its
+        # width in order to see it. We'll add an offset again.
+        # The y coordinate of the button will be relative to the
+        # bottom border of the root widget, just like before.
+        pos: root.right - self.width - 20, root.y + 20
