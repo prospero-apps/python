@@ -1,0 +1,21 @@
+# File name: helloworld.kv
+<CustomButton@Button>:
+    size_hint: .2, .1
+
+<FloatLayout>:     
+    CustomButton:
+        text: 'Button 1'
+
+        # The button should be 10% from the left horizontally
+        # and its top should be in the middle vertically.
+        pos_hint: {'x': .1, 'top': .5}
+    CustomButton:
+        text: 'Button 2'
+        
+        # The button should be in the center of the window.
+        pos_hint: {'center_x': .5, 'center_y': .5}
+    CustomButton:
+        text: 'Button 3'
+        
+        # The button should be on the right and 20% above the bottom.
+        pos_hint: {'right': 1, 'y': .2}

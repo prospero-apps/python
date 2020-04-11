@@ -1,0 +1,17 @@
+# File name: helloworld.kv
+
+<FloatLayout>:     
+    Button:
+        text: 'Button 1' 
+        pos: 20, 50    
+        
+        # Here's the difference.
+        size_hint_x: None 
+        size: 200, 20 
+        
+    Button:
+        text: 'Button 2'
+        pos: 500, 500
+        size_hint: None, None
+        size: 200, 20 
+
