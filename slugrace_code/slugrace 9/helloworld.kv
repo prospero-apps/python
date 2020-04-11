@@ -1,0 +1,17 @@
+# File name: helloworld.kv
+
+<MyCustomButton>:
+    size: 120, 40
+    color: .7, .6, .4, 1
+
+<MyCustomWidget>: 
+    TextInput:
+        hint_text: 'Type Something'
+        pos: root.x + 20, root.top - self.height - 20
+        size: 300, 40
+    MyCustomButton:
+        text: 'Press Me'
+        pos: root.x + 20, root.y + 20
+    MyCustomButton:
+        text: 'Press Me Too'
+        pos: root.right - self.width - 20, root.y + 20
