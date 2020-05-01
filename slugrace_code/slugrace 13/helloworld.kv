@@ -1,0 +1,54 @@
+# File name: helloworld.kv
+
+# We'll need big buttons and small buttons to represent the tiles.
+<BigButton@Button>:
+    size_hint: None, None
+    size: 200, 200
+
+<SmallButton@Button>:
+    size_hint: None, None
+    size: 100, 100
+
+<OuterGridLayout>: 
+    rows: 3       
+    size_hint: None, None
+    size: 600, 600
+    # The big buttons will be placed directly in the outer GridLayout.
+    # The small buttons will be placed in inner GridLayouts embedded
+    # in the outer one.    
+    BigButton:
+        text: '1'
+    BigButton:
+        text: '2'
+    BigButton:
+        text: '3'
+    GridLayout:
+        rows: 2
+        SmallButton:
+            text: '4a'
+        SmallButton:
+            text: '4b'
+        SmallButton:
+            text: '4c'
+        SmallButton:
+            text: '4d'
+    BigButton:
+        text: '5'
+    BigButton:
+        text: '6'    
+    BigButton:
+        text: '7'
+    BigButton:
+        text: '8'
+    GridLayout:
+        rows: 2
+        SmallButton:
+            text: '9a'
+        SmallButton:
+            text: '9b'
+        SmallButton:
+            text: '9c'
+        SmallButton:
+            text: '9d'
+    
+    
