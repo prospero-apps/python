@@ -1,0 +1,183 @@
+# File name: results.kv
+
+### CLASS RULES ###
+
+<RegularLabel@Label>:
+    color: .2, .1, 0, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+
+<BoldLabel@RegularLabel>:    
+    bold: True
+
+# The RedButton class rule.
+<RedButton@Button>:
+    background_color: .8, 0, 0, 1
+    color: 1, .8, .1, 1
+    bold: True
+    font_size: 18
+    size_hint: (None, None)    
+    size: 200, 40
+    pos_hint: {'center_x': 0.5}
+
+<ResultsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+               
+    orientation: 'vertical'
+    padding: 10    
+
+    ### TITLE LABEL ###
+    BoldLabel:  
+        text: 'Race 1 Results' 
+        size_hint: (1, None)
+        height: 30
+
+    ### PLAYER RESULTS ###   
+    BoxLayout:
+        orientation: 'vertical'
+
+        # player 1            
+        BoxLayout:                        
+            RegularLabel:
+                text: 'Player 1'
+            BoxLayout:                                
+                RegularLabel:                    
+                    text: 'had'
+                    size_hint: (.4, 1)
+                RegularLabel: 
+                    text: '$1000'                        
+            BoxLayout:                
+                RegularLabel:                    
+                    text: 'bet'
+                    size_hint: (.4, 1)   
+                RegularLabel:     
+                    text: '$300'                                                     
+            RegularLabel:
+                text: 'on Speedster'         
+            BoxLayout:
+                RegularLabel:
+                    text: '- won' 
+                    size_hint: (.5, 1)
+                RegularLabel: 
+                    text: '$400' 
+            BoxLayout:
+                RegularLabel:
+                    text: 'now has'                    
+                RegularLabel: 
+                    text: '$1400' 
+            RegularLabel:
+                text: 'The odds were 2.54'
+                
+
+        # player 2            
+        BoxLayout:                        
+            RegularLabel:
+                text: 'Player 2'
+            BoxLayout:                                
+                RegularLabel:                    
+                    text: 'had'
+                    size_hint: (.4, 1)
+                RegularLabel: 
+                    text: '$1000'                        
+            BoxLayout:                
+                RegularLabel:                    
+                    text: 'bet'
+                    size_hint: (.4, 1)   
+                RegularLabel:     
+                    text: '$300'                                                     
+            RegularLabel:
+                text: 'on Speedster'         
+            BoxLayout:
+                RegularLabel:
+                    text: '- lost' 
+                    size_hint: (.5, 1)
+                RegularLabel: 
+                    text: '$400' 
+            BoxLayout:
+                RegularLabel:
+                    text: 'now has'                    
+                RegularLabel: 
+                    text: '$600' 
+            RegularLabel:
+                text: 'The odds were 1.59'
+                
+
+        # player 3            
+        BoxLayout:                        
+            RegularLabel:
+                text: 'Player 3'
+            BoxLayout:                                
+                RegularLabel:                    
+                    text: 'had'
+                    size_hint: (.4, 1)
+                RegularLabel: 
+                    text: '$1000'                        
+            BoxLayout:                
+                RegularLabel:                    
+                    text: 'bet'
+                    size_hint: (.4, 1)   
+                RegularLabel:     
+                    text: '$300'                                                     
+            RegularLabel:
+                text: 'on Trusty'         
+            BoxLayout:
+                RegularLabel:
+                    text: '- won' 
+                    size_hint: (.5, 1)
+                RegularLabel: 
+                    text: '$400' 
+            BoxLayout:
+                RegularLabel:
+                    text: 'now has'                    
+                RegularLabel: 
+                    text: '$1400' 
+            RegularLabel:
+                text: 'The odds were 2.24'
+                
+
+        # player 4            
+        BoxLayout:                        
+            RegularLabel:
+                text: 'Player 4'
+            BoxLayout:                                
+                RegularLabel:                    
+                    text: 'had'
+                    size_hint: (.4, 1)
+                RegularLabel: 
+                    text: '$1000'                        
+            BoxLayout:                
+                RegularLabel:                    
+                    text: 'bet'
+                    size_hint: (.4, 1)   
+                RegularLabel:     
+                    text: '$300'                                                     
+            RegularLabel:
+                text: 'on Slowpoke'         
+            BoxLayout:
+                RegularLabel:
+                    text: '- lost' 
+                    size_hint: (.5, 1)
+                RegularLabel: 
+                    text: '$400' 
+            BoxLayout:
+                RegularLabel:
+                    text: 'now has'                    
+                RegularLabel: 
+                    text: '$600' 
+            RegularLabel:
+                text: 'The odds were 1.85'
+                
+
+    ### NEXT RACE BUTTON ###    
+    
+    # We're replacing Button with RedButton.
+    RedButton:
+        text: 'Next Race'
+
+    
