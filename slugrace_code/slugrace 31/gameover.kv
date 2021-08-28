@@ -1,0 +1,63 @@
+# File name: gameover.kv
+
+### CLASS RULES ###
+
+<RegularLabel@Label>:
+    color: .2, .1, 0, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+
+<BoldLabel@RegularLabel>:    
+    bold: True
+
+# The RedButton class rule.
+<RedButton@Button>:
+    background_color: .8, 0, 0, 1
+    color: 1, .8, .1, 1
+    bold: True
+    font_size: 18
+    size_hint: (None, None)    
+    size: 200, 40
+    pos_hint: {'center_x': 0.5}
+
+<GameoverScreen>: 
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    orientation: 'vertical'
+    
+    BoldLabel:
+        font_size: 100
+        text: 'Game Over'
+        halign: 'center'
+
+    BoldLabel:
+        font_size: 40
+        text: "There's only one player with any money left."
+        halign: 'center'
+
+    BoldLabel:
+        font_size: 30
+        text: "The winner is Player 2, having started at $1000, winning at $999"
+        halign: 'center'
+    
+    # The buttons
+    BoxLayout: 
+        spacing: 50            
+        pos_hint: {'center_x': .5, 'center_y': .5} 
+        size_hint: None, None
+        size: 450, 200 
+                   
+        # We're replacing Button with RedButton, but 
+        # we have to overwrite the pos_hint property.      
+        RedButton:
+            text: 'Play Again'
+            pos_hint: {'x': 0, 'center_y': .5}
+        RedButton:
+            text: 'Quit'
+            pos_hint: {'right': 1, 'center_y': .5} 
