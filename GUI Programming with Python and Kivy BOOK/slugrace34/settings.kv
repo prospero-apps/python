@@ -1,0 +1,150 @@
+#:kivy 1.11.1
+# File name: settings.kv
+
+<SettingsScreen>:
+    orientation: 'vertical'
+    
+    ### SETTINGS LABEL ###
+    Label:
+        text: 'Settings'
+        font_size: 28
+
+    ### THE PLAYERS ###
+    BoxLayout:
+        orientation: 'vertical'
+        
+        # Title 
+        Label:
+            text: 'The Players'
+
+        # Radio Buttons 
+        # the BoxLayout for all four radio buttons
+        BoxLayout:
+            
+            # the BoxLayout for the radio button + label for 1 player
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '1 player'
+
+            # the BoxLayout for the radio button + label for 2 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '2 players'
+
+            # the BoxLayout for the radio button + label for 3 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '3 players'
+
+            # the BoxLayout for the radio button + label for 4 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '4 players'
+
+        # Player Name and Initial Money Setup 
+        # Everything will be in a vertical BoxLayout.
+        BoxLayout:
+            orientation: 'vertical'
+
+            # the headers row
+            BoxLayout:
+
+                # empty label just to add some space
+                Label:
+                    text: "" 
+
+                # name header
+                Label:
+                    text: "Name"
+
+                # money header
+                Label:
+                    text: "Initial Money"
+
+            # the players rows
+            # player 1
+            BoxLayout:
+
+                # label with generic player name
+                Label:
+                    text: 'Player 1'
+
+                # text input for new player name
+                TextInput:
+                    # no multiline text allowed
+                    multiline: False
+
+                # BoxLayout for the money part
+                BoxLayout:
+                    # empty label to add some space
+                    Label:
+                        text: ""
+                                           
+                    # label with dollar sign
+                    Label:
+                        text: "$"
+
+                    # text input for initial money 
+                    TextInput:
+                        multiline: False
+
+            # The code for the other players is without 
+            # comments to make it more concise.
+            # player 2
+            BoxLayout:
+                Label:
+                    text: 'Player 2'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False
+
+            # player 3
+            BoxLayout:
+                Label:
+                    text: 'Player 3'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False
+
+            # player 4
+            BoxLayout:
+                Label:
+                    text: 'Player 4'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False  
+
+
+    ### ENDING CONDITIONS ###
+    Label:
+        text: 'Ending Conditions'
+
+    ### READY BUTTON ###
+    Button:
+        text: 'Ready'

@@ -1,0 +1,171 @@
+#:kivy 1.11.1
+# File name: settings.kv
+
+<SettingsScreen>:
+    orientation: 'vertical'
+    
+    ### SETTINGS LABEL ###
+    Label:
+        text: 'Settings'
+        font_size: 28
+
+    ### THE PLAYERS ###
+    BoxLayout:
+        orientation: 'vertical'
+        
+        # Title 
+        Label:
+            text: 'The Players'
+
+        # Radio Buttons 
+        BoxLayout:
+            
+            # 1 player
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '1 player'
+
+            # 2 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '2 players'
+
+            # 3 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '3 players'
+
+            # 4 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+                Label:
+                    text: '4 players'
+
+        # Player Name and Initial Money Setup 
+        BoxLayout:
+            orientation: 'vertical'
+
+            # the headers row
+            BoxLayout:
+
+                # empty label 
+                Label:
+                    text: "" 
+
+                # name header
+                Label:
+                    text: "Name"
+
+                # money header
+                Label:
+                    text: "Initial Money"
+
+            # the players rows
+            # player 1
+            BoxLayout:
+                Label:
+                    text: 'Player 1'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""                                     
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False
+
+            # player 2
+            BoxLayout:
+                Label:
+                    text: 'Player 2'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False
+
+            # player 3
+            BoxLayout:
+                Label:
+                    text: 'Player 3'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False
+
+            # player 4
+            BoxLayout:
+                Label:
+                    text: 'Player 4'
+                TextInput:
+                    multiline: False
+                BoxLayout:
+                    Label:
+                        text: ""
+                    Label:
+                        text: "$"
+                    TextInput:
+                        multiline: False  
+
+    ### ENDING CONDITIONS ###
+    # Everything will be in a vertical BoxLayout.
+    BoxLayout:
+        orientation: 'vertical'
+
+        # title label
+        Label:
+            text: "Ending Conditions"
+
+        # radio buttons
+        # The radio buttons will be placed in a GridLayout.
+        GridLayout:
+            rows: 3
+
+            # option 1: money
+            CheckBox:
+                # All check boxes in this area will be assigned to a group,
+                # which will turn them into radio buttons.
+                group: 'conditions'
+            # Each radio button will be accompanied by a label.
+            Label:
+                text: "The game is over when there is only one player with any money left."
+
+            # option 2: races
+            CheckBox:
+                group: 'conditions'
+            # The label and the text input will be placed in a horizontal BoxLayout.
+            BoxLayout:                
+                Label:
+                    text: "The game is over not later than after a given number of races."
+                TextInput:
+                    multiline: False
+
+            # option 3: time
+            CheckBox:
+                group: 'conditions'
+            BoxLayout:                
+                Label:
+                    text: "The game is over not later than the total racing time has elapsed."
+                TextInput:
+                    multiline: False
+
+    ### READY BUTTON ###
+    Button:
+        text: 'Ready'
