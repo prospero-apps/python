@@ -1,0 +1,16 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>: 
+    button: _button
+
+    Button:
+        id: _button
+        text: 'button'
+        font_size: 40
+        size_hint: .2, .1
+        pos: 20, 100     
+
+        # The animations will be created and 
+        # started when the button is pressed.
+        on_press: root.start_animations()

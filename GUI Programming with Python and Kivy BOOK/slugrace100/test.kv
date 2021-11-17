@@ -1,0 +1,19 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<CustomButton>:
+    size_hint: .2, .1
+    font_size: 60
+    text: '*'
+    bold: True
+    color: [1, 0, 0, 1] # red
+
+<TestLayout>: 
+    CustomButton:
+        pos_hint: {'center_x': .2, 'center_y': .2}
+
+    CustomButton:
+        pos_hint: {'center_x': .5, 'center_y': .2}
+
+    CustomButton:
+        pos_hint: {'center_x': .8, 'center_y': .2}
