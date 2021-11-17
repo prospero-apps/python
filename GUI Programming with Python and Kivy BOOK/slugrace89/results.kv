@@ -1,0 +1,119 @@
+#:kivy 1.11.1
+# File name: results.kv
+#:import results results
+
+<Result>:  
+    opacity: int(not self.disabled)
+                     
+    RegularLabel:
+        text: root.player_name
+    BoxLayout:                                
+        RegularLabel:                    
+            text: 'had'
+            size_hint: (.4, 1)
+        RegularLabel: 
+            text: '$' + str(root.money_before)                        
+    BoxLayout:                
+        RegularLabel:                    
+            text: 'bet'
+            size_hint: (.4, 1)   
+        RegularLabel:     
+            text: '$' + str(root.bet_amount)                                                     
+    RegularLabel:
+        text: 'on ' + root.slug_name         
+    BoxLayout:
+        RegularLabel:
+            text: root.result_info 
+            size_hint: (.5, 1)
+        RegularLabel: 
+            text: '$' + str(root.gain_or_loss) if root.gain_or_loss >= 1 else 'less than $1' 
+    BoxLayout:
+        RegularLabel:
+            text: 'now has'                    
+        RegularLabel: 
+            text: '$' + str(root.current_money) 
+    RegularLabel:
+        # Now odds is a StringProperty, so there’s no need to cast.
+        text: 'The odds were ' + root.odds
+
+<ResultsScreen>: 
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    game: root.manager.parent.parent.parent.manager
+                  
+    BoxLayout:                     
+        orientation: 'vertical'
+        padding: 10    
+        
+        ### TITLE LABEL ###
+        BoldLabel:  
+            text: 'Race {} Results'.format(root.game.race_number) 
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER RESULTS ###   
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Result:
+                player_name: root.game.player1.name
+                money_before: root.game.player1.money_before_race
+                bet_amount: root.game.player1.bet
+                slug_name: root.game.player1.chosen_slug.name if root.game.player1.chosen_slug else ''
+                result_info: '- won' if root.game.player1.money_won >= 0 else '- lost'
+                gain_or_loss: abs(root.game.player1.money_won)
+                current_money: root.game.player1.money
+                odds: '{:.2f}'.format(root.game.player1.chosen_slug.odds) if root.game.player1.chosen_slug else '1.00'
+
+            # player 2
+            Result:
+                player_name: root.game.player2.name
+                money_before: root.game.player2.money_before_race
+                bet_amount: root.game.player2.bet
+                slug_name: root.game.player2.chosen_slug.name if root.game.player2.chosen_slug else ''
+                result_info: '- won' if root.game.player2.money_won >= 0 else '- lost'
+                gain_or_loss: abs(root.game.player2.money_won)
+                current_money: root.game.player2.money
+                odds: '{:.2f}'.format(root.game.player2.chosen_slug.odds) if root.game.player2.chosen_slug else '1.00'
+                disabled: root.game.number_of_players < 2
+
+            # player 3
+            Result:
+                player_name: root.game.player3.name
+                money_before: root.game.player3.money_before_race
+                bet_amount: root.game.player3.bet
+                slug_name: root.game.player3.chosen_slug.name if root.game.player3.chosen_slug else ''
+                result_info: '- won' if root.game.player3.money_won >= 0 else '- lost'
+                gain_or_loss: abs(root.game.player3.money_won)
+                current_money: root.game.player3.money
+                odds: '{:.2f}'.format(root.game.player3.chosen_slug.odds) if root.game.player3.chosen_slug else '1.00'
+                disabled: root.game.number_of_players < 3
+
+            # player 4
+            Result:
+                player_name: root.game.player4.name
+                money_before: root.game.player4.money_before_race
+                bet_amount: root.game.player4.bet
+                slug_name: root.game.player4.chosen_slug.name if root.game.player4.chosen_slug else ''
+                result_info: '- won' if root.game.player4.money_won >= 0 else '- lost'
+                gain_or_loss: abs(root.game.player4.money_won)
+                current_money: root.game.player4.money
+                odds: '{:.2f}'.format(root.game.player4.chosen_slug.odds) if root.game.player4.chosen_slug else '1.00'
+                disabled: root.game.number_of_players < 4
+                
+        ### NEXT RACE BUTTON ###  
+        RedButton:
+            text: 'Next Race'
+            on_press: 
+                # Let's call the method that will, among other things, 
+                # increment the race number.
+                root.game.reset_race()
+
+                root.manager.current = 'betsscreen'
+                root.manager.transition.direction = 'right'

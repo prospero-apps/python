@@ -1,0 +1,29 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>: 
+    button1: _button1
+    button2: _button2
+
+    # Here's the ObjectProperty to reference the custom slider.
+    slider: _slider
+
+    CustomButton:
+        id: _button1
+        text: str(self.counter)        
+        size_hint_x: .5
+    
+    CustomButton:
+        id: _button2
+        text: str(self.counter)
+        size_hint_x: .5
+        pos_hint: {'x': .5}
+
+    # Here's the custom slider.
+    CustomSlider:
+        id: _slider
+        min: 0
+        max: 1
+        value: 1
+        orientation: 'vertical'
+

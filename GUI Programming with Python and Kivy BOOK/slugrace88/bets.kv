@@ -1,0 +1,134 @@
+#:kivy 1.11.1
+# File name: bets.kv
+#:import bets bets
+
+<Bet>:
+    spacing: 10 
+    opacity: int(not self.disabled)
+           
+    RegularLabel:
+        text: root.player_name    
+    RegularLabel:                    
+        text: 'bets'
+        size_hint: (.4, 1)    
+    BoxLayout: 
+        spacing: 5                                   
+        RegularLabel: 
+            text: '$'
+            halign: 'right'                        
+        BetInput: 
+            text: str(root.bet_amount) 
+            hint_text: '(1 - {})'.format(root.max_bet_amount) 
+            min_value: 1
+            max_value: root.max_bet_amount 
+            on_text: _slider.value = min(int(self.text), root.max_bet_amount) if self.text else self.min_value                         
+    Slider:
+        id: _slider
+        min: 1
+        max: root.max_bet_amount                             
+        value: root.bet_amount
+        step: 1 
+        on_value: root.bet_amount = self.value 
+                  
+    RegularLabel:
+        text: 'on'
+        size_hint: (.3, 1)    
+    BoxLayout:  
+        PlayerSlugButton:
+            group: root.player_group  
+            on_active: if self.active: root.selected_slug = 1                    
+        RegularLabel:
+            text: 'Speedster'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group
+            on_active: if self.active: root.selected_slug = 2        
+        RegularLabel:
+            text: 'Trusty'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group
+            on_active: if self.active: root.selected_slug = 3        
+        RegularLabel:
+            text: 'Iffy'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group  
+            on_active: if self.active: root.selected_slug = 4          
+        RegularLabel:
+            text: 'Slowpoke' 
+
+<BetsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+    
+    game: root.manager.parent.parent.parent.manager
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        ### TITLE LABEL ###
+        BoldLabel:
+            text: "Bets"
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER BETS ###
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Bet:
+                player_name: root.game.player1.name 
+                bet_amount: root.game.player1.bet
+                max_bet_amount: root.game.player1.money 
+                player_group: 'player1'
+                on_bet_amount: self.update_player_bet(root.game.player1) 
+                on_selected_slug: root.select_slug(root.game.player1, self.selected_slug - 1)                            
+
+            # player 2
+            Bet:
+                player_name: root.game.player2.name 
+                bet_amount: root.game.player2.bet
+                max_bet_amount: root.game.player2.money 
+                player_group: 'player2'
+                disabled: root.game.number_of_players < 2
+                on_bet_amount: self.update_player_bet(root.game.player2)  
+                on_selected_slug: root.select_slug(root.game.player2, self.selected_slug - 1)
+
+            # player 3
+            Bet:
+                player_name: root.game.player3.name 
+                bet_amount: root.game.player3.bet
+                max_bet_amount: root.game.player3.money 
+                player_group: 'player3'
+                disabled: root.game.number_of_players < 3
+                on_bet_amount: self.update_player_bet(root.game.player3)
+                on_selected_slug: root.select_slug(root.game.player3, self.selected_slug - 1)
+
+            # player 4
+            Bet:
+                player_name: root.game.player4.name 
+                bet_amount: root.game.player4.bet
+                max_bet_amount: root.game.player4.money 
+                player_group: 'player4'
+                disabled: root.game.number_of_players < 4
+                on_bet_amount: self.update_player_bet(root.game.player4)
+                on_selected_slug: root.select_slug(root.game.player4, self.selected_slug - 1)
+
+        ### GO BUTTON ###
+        RedButton:
+            text: 'Go'
+            disabled: not root.all_slugs_selected
+            on_press: 
+                root.manager.current = 'resultsscreen'
+                root.manager.transition.direction = 'left'
+
+                # Start the race.
+                root.game.go()
