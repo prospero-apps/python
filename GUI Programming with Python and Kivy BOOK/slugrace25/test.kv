@@ -1,0 +1,16 @@
+# File name: test.kv
+
+<CustomSlider@Slider>:
+    size_hint: None, None
+    size: 100, 500
+    min: 0
+    max: 100
+    value: 50
+    orientation: 'vertical'
+
+<AnchorLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'  
+ 
+    CustomSlider:        
+        on_touch_move: root.anchor_x = 'left' if self.value <= 50 else 'right'

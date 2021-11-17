@@ -1,0 +1,17 @@
+# File name: test.kv
+
+<RelativeLayout>: 
+    pos: 100, 50    
+    Button:        
+        text: str(self.pos) + '\n' + str(self.to_window(*self.pos))  
+        size_hint: None, None
+        size: 200, 100        
+        pos_hint: {'x': 0, 'y': 0}
+        on_press: self.parent.size_hint = .5, .5
+    
+    Button:
+        text: str(self.pos) + '\n' + str(self.to_window(*self.pos))
+        size_hint: None, None
+        size: 200, 100
+        pos_hint: {'x': .5, 'y': 0}
+        on_press: self.parent.size_hint = 1, 1

@@ -1,0 +1,20 @@
+# File name: test.kv
+
+<CustomButton@Button>:
+    size_hint: None, None
+    size: 200, 100
+
+<BoxLayout>: 
+    orientation: 'horizontal'  
+    
+    CustomButton:
+        text: 'Button 1'  
+        pos_hint: {'y': 0}       
+    
+    CustomButton:
+        text: 'Button 2' 
+        pos_hint: {'center_y': .5}
+
+    CustomButton:
+        text: 'Button 3' 
+        pos_hint: {'top': 1}

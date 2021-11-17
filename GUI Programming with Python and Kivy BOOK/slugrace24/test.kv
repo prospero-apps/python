@@ -1,0 +1,36 @@
+# File name: test.kv
+
+<CustomButton@Button>:
+    size_hint: None, None
+    size: 300, 100
+    font_size: 40
+
+<StackLayout>: 
+    # The buttons should be arranged
+    # from bottom to top, left to right.
+    orientation: 'bt-lr'
+
+    # Add padding and spacing.
+    padding: 20
+    spacing: 10
+       
+    CustomButton:
+        text: 'Button 1'    
+    CustomButton:
+        text: 'Button 2' 
+    CustomButton:
+        text: 'Button 3' 
+    CustomButton:
+        text: 'Button 4' 
+    CustomButton:
+        text: 'Button 5' 
+    CustomButton:
+        text: 'Button 6'    
+    CustomButton:
+        text: 'Button 7' 
+    CustomButton:
+        text: 'Button 8' 
+    CustomButton:
+        text: 'Button 9' 
+    CustomButton:
+        text: 'Button 10' 

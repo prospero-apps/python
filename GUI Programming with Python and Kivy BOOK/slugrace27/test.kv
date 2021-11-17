@@ -1,0 +1,55 @@
+# File name: test.kv
+
+<FloatLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        size: 200, 300
+        pos_hint: {'x': 0, 'top': 1}
+
+        Slider:
+        Slider:
+        Slider:
+        
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint: None, None
+        size: 300, 300
+        pos_hint: {'x': 0, 'y': 0}
+
+        Button:
+            text: ':)'
+            size_hint: None, None
+            size: 200, 200
+
+    PageLayout:
+        size_hint: None, None
+        size: 300, 200
+        pos_hint: {'right': 1, 'y': 0}
+
+        Button:
+            text: 'A'
+        Button:
+            text: 'B'
+        Button:
+            text: 'C'
+
+    GridLayout:
+        cols: 3
+        size_hint: None, None
+        size: 300, 300
+        pos_hint: {'right': 1, 'top': 1}
+
+        Label:
+            text: '1'
+        Label:
+            text: '2'
+        Label:
+            text: '3'
+        Label:
+            text: '4'
+        Label:
+            text: '5'
+        Label:
+            text: '6'
