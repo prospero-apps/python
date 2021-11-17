@@ -1,0 +1,8 @@
+# File name: test.kv
+
+<Button>:
+    text: 'Test'
+    font_size: 80
+
+    on_press: if self.font_size < 200: self.font_size += 10  
+    on_release: self.text = self.text[:-1] if len(self.text) > 1 else 'The End'

@@ -1,0 +1,7 @@
+# File name: test.kv
+
+<ToggleButton>:
+    text: 'Test'
+    font_size: 80    
+    state: 'down'
+    on_state: self.bold = True if self.state == 'normal' else False
