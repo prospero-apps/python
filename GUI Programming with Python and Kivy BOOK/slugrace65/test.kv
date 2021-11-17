@@ -1,0 +1,65 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:
+    label1: _label1
+    label2: _label2
+    button1: _button1
+    button2: _button2
+    slider: _slider
+
+    # Here are the three properties:
+    button3: _button3
+    button4: _button4
+    button5: _button5
+
+    Label:
+        id: _label1
+        text: 'label 1'
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'top': 1}
+
+    BoxLayout:        
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'top': 1}
+
+        Button:
+            id: _button1
+            text: 'button 1'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Button:
+                id: _button2
+                text: 'button 2'
+
+            Slider:
+                id: _slider
+                min: 100
+                max: 200
+                value: 150
+                orientation: 'vertical'
+
+            Button:
+                # We need the id to reference this button.
+                id: _button3
+                text: 'button 3'
+            
+        Button:
+            # We need the id to reference this button.
+            id: _button4
+            text: 'button 4'
+
+    Button:
+        # We need the id to reference this button.
+        id: _button5
+        text: 'button 5'
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'y': 0}
+
+    Label:
+        id: _label2
+        text: 'label 2'
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'y': 0}

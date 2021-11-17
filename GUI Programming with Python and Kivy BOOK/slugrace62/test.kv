@@ -1,0 +1,38 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:    
+    Label:
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'top': 1}
+
+    BoxLayout:        
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'top': 1}
+
+        Button:
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Button:
+
+            Slider:
+                min: 100
+                max: 200
+                value: 150
+                orientation: 'vertical'
+
+            Button:
+            
+        Button:
+
+    CustomButton:
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'y': 0}
+        on_press: self.set_text()
+
+    Label:
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'y': 0}
+

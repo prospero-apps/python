@@ -1,0 +1,55 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<CustomLayout>:        
+    size_hint: .5, .5
+    pos_hint: {'x': .5, 'top': 1}
+
+    Button:
+        text: str(_slider.orientation)
+
+        # When the button is pressed, the method move_slider
+        # is called. This method is defined in the CustomLayout
+        # class in the Python file, which is the root, so
+        # we call the function on the root.
+        on_press: root.move_slider()
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:  
+            text: str(_slider.orientation)
+
+        Slider:
+            id: _slider
+            min: 100
+            max: 200
+            value: 150
+            orientation: 'vertical'
+
+        Button:
+            text: str(_slider.value)
+        
+    Button:
+        text: str(_slider.orientation)
+
+<TestLayout>:    
+    Label:
+        text: _label2.text
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'top': 1}
+
+    CustomLayout: 
+
+    CustomButton:
+        id: _customButton
+        text: _label2.text
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'y': 0}
+        on_press: self.set_text()
+
+    Label:
+        id: _label2
+        text: 'label 2'
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'y': 0}
