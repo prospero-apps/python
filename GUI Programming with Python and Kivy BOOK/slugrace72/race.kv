@@ -1,0 +1,353 @@
+#:kivy 1.11.1
+# File name: race.kv
+#:import race race
+
+# Here's the implementation of the screen manager.
+<RaceScreenManager>:
+    BetsScreen:
+        name: 'betsscreen'
+    ResultsScreen:
+        name: 'resultsscreen'
+
+<SlugStats>:     
+    spacing: 10
+    RegularLabel:
+        text: root.name
+    RegularLabel:
+        text: str(root.wins) + (' win' if root.wins == 1 else ' wins')
+    RegularLabel:   
+        text: str(root.win_percent) + '%'
+
+<PlayerStats>: 
+    RegularLabel:
+        text: root.name
+    RegularLabel:
+        text: 'has $' + str(root.money)
+
+<SlugInfo>:
+    orientation: 'vertical'
+    size_hint: None, None
+    size: 100, 50
+    pos_hint: {'x': .004, 'center_y': root.y_position}
+
+    WhiteNameLabel:
+        text: root.name                 
+
+    WhiteWinsLabel:
+        text: str(root.wins) + (' win' if root.wins == 1 else ' wins')
+
+<SlugImage>:
+    pos_hint: {'x': .09, 'center_y': root.y_position}
+    size_hint: None, None
+    size: 143, 30
+
+    # the body image
+    Image:
+        source: 'atlas://assets/slugs/slugs/' + root.body_image
+
+    # the left eye image    
+    Image:
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: 30
+                axis: 0, 0, 1
+                origin: self.x, self.center_y
+        canvas.after:
+            PopMatrix                    
+
+        source: 'atlas://assets/slugs/slugs/' + root.eye_image
+        pos_hint: {'x': .95, 'y': .45}
+        size_hint: 0.25, 0.25
+
+    # the right eye image
+    Image:
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: -30
+                axis: 0, 0, 1
+                origin: self.x, self.center_y
+        canvas.after:
+            PopMatrix
+
+        source: 'atlas://assets/slugs/slugs/' + root.eye_image
+        pos_hint: {'x': .95, 'y': .3}
+        size_hint: 0.25, 0.25
+
+<RaceScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+
+        ### INFO, STATS AND BUTTONS ###
+        GridLayout:
+            cols: 4
+            size_hint: 1, .5
+            spacing: 10
+
+            # Game Info
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: 'Game Info:'
+                BoxLayout:                    
+                    RegularLabel:
+                        size_hint: (2.5, 1)
+                        text: 'Race No'
+                    RegularLabel: 
+                        text: '1'            
+                BoxLayout:                                                      
+                    RegularLabel: 
+                        size_hint: (2.5, 1)                        
+                        text: 'Number of races set:' 
+                    RegularLabel:
+                        text: '10'                        
+                BoxLayout:
+                    RegularLabel: 
+                        size_hint: (2.5, 1)
+                        text: 'Races finished:' 
+                    RegularLabel:
+                        text: '0'          
+                BoxLayout:
+                    RegularLabel:
+                        size_hint: (2.5, 1)
+                        text: 'Races to go:' 
+                    RegularLabel:
+                        text: '10'
+
+            # Slugs' Stats           
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: "Slugs' Stats"
+                
+                SlugStats:
+                    name: 'Speedster'
+                    wins: 7
+                    win_percent: 70
+
+                SlugStats:
+                    name: 'Trusty'
+                    wins: 1
+                    win_percent: 10
+
+                SlugStats:
+                    name: 'Iffy'
+                    wins: 0
+                    win_percent: 0
+
+                SlugStats:
+                    name: 'Slowpoke'
+                    wins: 2
+                    win_percent: 20
+
+            # Players' Stats           
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: "Players' Stats"                                
+
+                PlayerStats:
+                    name: 'Player 1'
+                    money: 1000        
+
+                PlayerStats:
+                    name: 'Player 2'
+                    money: 800    
+
+                PlayerStats:
+                    name: 'Player 3'
+                    money: 1300    
+
+                PlayerStats:
+                    name: 'Player 4'
+                    money: 1200                         
+
+            # Buttons
+            BoxLayout:
+                orientation: 'vertical'   
+                spacing: 3 
+                size_hint: .7, 1               
+                
+                RedButton:
+                    text: 'End Game'  
+                    pos_hint: {'right': 1}
+                    on_press: root.manager.current = 'gameoverscreen'
+
+                RedButton:
+                    text: 'Instructions'   
+                    pos_hint: {'right': 1}
+                
+                RedButton: 
+                    text: 'Sound'
+                    pos_hint: {'right': 1}
+                    size: 70, 40
+        
+        ### THE TRACK ###
+        BoxLayout:  
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+        
+            padding: 10
+
+            # Track Image
+            RelativeLayout:
+                size_hint: None, None
+                size: 1000, 200
+                pos_hint: {'center_y': .5}    
+                Image:
+                    source: 'assets/racetrack.png'
+
+                # white labels with slug info            
+                # Speedster
+                SlugInfo:
+                    y_position: .875
+                    name: 'Speedster'
+                    wins: 7
+
+                # Trusty
+                SlugInfo:
+                    y_position: .625
+                    name: 'Trusty'
+                    wins: 1
+
+                # Iffy
+                SlugInfo:
+                    y_position: .375
+                    name: 'Iffy'
+                    wins: 0
+
+                # Slowpoke
+                SlugInfo:
+                    y_position: .125
+                    name: 'Slowpoke'
+                    wins: 2
+
+                # the odds labels
+                # Speedster
+                WhiteOddsLabel:
+                    text: '1.42'                
+                    pos_hint: {'x': .77, 'center_y': .875}
+
+                # Trusty
+                WhiteOddsLabel:
+                    text: '1.61'                
+                    pos_hint: {'x': .77, 'center_y': .625}
+
+                # Iffy
+                WhiteOddsLabel:
+                    text: '2.53'                
+                    pos_hint: {'x': .77, 'center_y': .375}
+
+                # Slowpoke
+                WhiteOddsLabel:
+                    text: '2.89'                
+                    pos_hint: {'x': .77, 'center_y': .125}  
+
+                # slug images
+                # Speedster
+                SlugImage:
+                    body_image: 'speedsterBody'
+                    eye_image: 'speedsterEye'
+                    y_position: .875
+                
+                # Trusty
+                SlugImage:
+                    body_image: 'trustyBody'
+                    eye_image: 'trustyEye'
+                    y_position: .625
+
+                # Iffy
+                SlugImage:
+                    body_image: 'iffyBody'
+                    eye_image: 'iffyEye'
+                    y_position: .375
+
+                # Slowpoke
+                SlugImage:
+                    body_image: 'slowpokeBody'
+                    eye_image: 'slowpokeEye'
+                    y_position: .125
+
+            # Winner
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (.18, 1)
+
+                Label:
+                    color: .2, .1, 0, 1
+                    text: "The winner is"
+                    font_size: 24
+                    size_hint: 1, .2
+                    bold: True
+
+                Label:
+                    color: .2, .1, 0, 1
+                    text: "Trusty"
+                    font_size: 32
+                    size_hint: 1, .2
+                    bold: True
+
+                Image:
+                    source: 'atlas://assets/silhouettes/silhouettes/Trusty'
+        
+        ### THE BETS ###
+        # Let's enclose the RaceScreenManager inside a BoxLayout. Let's move
+        # the canvas instructions from the Label to the BoxLayout.
+        # Let's also add 5 pixels of padding so that the rounded rectangle
+        # is not partially covered by the screen loaded by the screen manager.
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+
+            padding: 5
+
+            # Here's the screen manager. We could set its current property 
+            # to 'betsscreen', but this would be redundant as the manager 
+            # uses the first screen by default.
+            RaceScreenManager:
+                # current: 'betsscreen'

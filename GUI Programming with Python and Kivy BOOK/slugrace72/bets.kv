@@ -1,0 +1,105 @@
+#:kivy 1.11.1
+# File name: bets.kv
+#:import bets bets
+
+<Bet>:
+    spacing: 10            
+    RegularLabel:
+        text: root.player_name    
+    RegularLabel:                    
+        text: 'bets'
+        size_hint: (.4, 1)    
+    BoxLayout: 
+        spacing: 5                                   
+        RegularLabel: 
+            text: '$'
+            halign: 'right'                        
+        BetInput: 
+            text: str(root.bet_amount)                            
+    Slider:
+        min: 1
+        max: root.max_bet_amount                             
+        value: root.bet_amount
+        step: 1                        
+    RegularLabel:
+        text: 'on'
+        size_hint: (.3, 1)    
+    BoxLayout:  
+        PlayerSlugButton:
+            group: root.player_group                 
+        RegularLabel:
+            text: 'Speedster'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group        
+        RegularLabel:
+            text: 'Trusty'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group        
+        RegularLabel:
+            text: 'Iffy'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group            
+        RegularLabel:
+            text: 'Slowpoke' 
+
+<BetsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        ### TITLE LABEL ###
+        BoldLabel:
+            text: "Bets"
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER BETS ###
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Bet:
+                player_name: 'Player 1' 
+                bet_amount: 1000
+                max_bet_amount: 1000 
+                player_group: 'player1'
+
+            # player 2
+            Bet:
+                player_name: 'Player 2' 
+                bet_amount: 1000
+                max_bet_amount: 1000 
+                player_group: 'player2'
+
+            # player 3
+            Bet:
+                player_name: 'Player 3' 
+                bet_amount: 1000
+                max_bet_amount: 1000 
+                player_group: 'player3'
+
+            # player 4
+            Bet:
+                player_name: 'Player 4' 
+                bet_amount: 1000
+                max_bet_amount: 1000 
+                player_group: 'player4'
+
+        ### GO BUTTON ###
+        RedButton:
+            text: 'Go'
+
+            # When the button is pressed, this screen should 
+            # switch to the Results screen.
+            on_press: root.manager.current = 'resultsscreen'

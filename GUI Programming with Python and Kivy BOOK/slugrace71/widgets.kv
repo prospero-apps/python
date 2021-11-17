@@ -1,0 +1,96 @@
+#:kivy 1.11.1
+# File name: widgets.kv
+
+### LABELS ###
+<RegularLabel@Label>:
+    color: .2, .1, 0, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+
+<TitleLabel@RegularLabel>:
+    font_size: 20
+    size_hint: (1, None)
+    height: 30
+
+<Regular80x30Label@RegularLabel>:
+    size_hint: None, None
+    size: 80, 30
+
+<DollarLabel@RegularLabel>:
+    text: "$"
+    size_hint: None, None
+    size: 20, 30   
+
+<BoldLabel@RegularLabel>:    
+    bold: True
+
+<WhiteOddsLabel@BoldLabel>:
+    font_size: 32
+    color: 1, 1, 1, 1    
+
+<WhiteNameLabel@BoldLabel>:
+    font_size: 18 
+    color: 1, 1, 1, 1       
+
+<WhiteWinsLabel@BoldLabel>:
+    font_size: 14   
+    color: 1, 1, 1, 1    
+
+### BUTTONS ###
+<RedButton@Button>:
+    background_color: .8, 0, 0, 1
+    color: 1, .8, .1, 1
+    bold: True
+    font_size: 18
+    size_hint: (None, None)    
+    size: 200, 40
+    pos_hint: {'center_x': 0.5}
+
+### TEXTINPUTS ###
+<NameInput@TextInput>:
+    multiline: False
+    size_hint: None, None
+    size: 400, 30
+    
+<NumInput@TextInput>:
+    multiline: False
+    size_hint: None, None
+    size: 250, 30
+
+<BetInput@NumInput>:    
+    width: 120 
+    pos_hint: {'center_y': .5}
+
+### CHECK BOXES ###
+<PlayerRadioButton@CheckBox>:
+    canvas.before:
+        Color:
+            rgba: 0,0,0,1
+        Ellipse:
+            pos:self.center_x - 10, self.center_y - 10
+            size:[20,20]
+
+    group: 'players'  
+    size_hint: (.5, 1)
+
+<ConditionRadioButton@CheckBox>:
+    canvas.before:
+        Color:
+            rgba: 0,0,0,1
+        Ellipse:
+            pos:self.center_x - 10, self.center_y - 10
+            size:[20,20]
+
+    group: 'conditions'
+    size_hint_x: .05
+
+<PlayerSlugButton@CheckBox>:
+    canvas.before:
+        Color:
+            rgba: 0,0,0,1
+        Ellipse:
+            pos:self.center_x - 10, self.center_y - 10
+            size:[20,20]
+
+    size_hint: (.5, 1)
