@@ -1,0 +1,200 @@
+#:kivy 1.11.1
+# File name: settings.kv
+#:import settings settings
+
+<PlayerCount>:
+    active: _player_radio_button.active
+    PlayerRadioButton:
+        id: _player_radio_button
+        active: root.active
+    RegularLabel:
+        text: root.count_text
+
+<PlayerSettings>:
+    name: _player_name.text
+    player_initial_money: _player_initial_money.text
+
+    Regular80x30Label:
+        text: root.label_text    
+    NameInput:
+        id: _player_name
+        hint_text: "Enter the name of " + root.label_text
+    BoxLayout:
+        RegularLabel:
+            text: ""
+            size_hint_x: None                
+            width: 280                            
+        DollarLabel:
+        NumInput:
+            id: _player_initial_money
+            hint_text: '1000'
+
+<SettingsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    game: root.manager 
+    players: [_player1, _player2, _player3, _player4]
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+    
+        ### SETTINGS LABEL ###
+        TitleLabel:
+            text: 'Settings'
+            font_size: 28
+
+        ### THE PLAYERS ###  
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, .4
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: 'assets/all slugs.png'
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10
+                    width: 2
+
+            orientation: 'vertical'
+            padding: 10
+            spacing: 10
+            
+            # Title         
+            TitleLabel:
+                text: 'The Players'
+
+            # Radio Buttons 
+            BoxLayout:
+                size_hint: (.4, None)
+                height: 50
+                
+                # 1 player
+                PlayerCount:
+                    count_text: '1 player'
+                    on_active: root.game.number_of_players = 1
+
+                # 2 players
+                PlayerCount:
+                    count_text: '2 players'
+                    active: True
+                    on_active: root.game.number_of_players = 2
+            
+                # 3 players
+                PlayerCount:
+                    count_text: '3 players'
+                    on_active: root.game.number_of_players = 3
+
+                # 4 players
+                PlayerCount:
+                    count_text: '4 players'
+                    on_active: root.game.number_of_players = 4
+
+            # Player Name and Initial Money Setup 
+            BoxLayout:
+                orientation: 'vertical'
+
+                # the headers row
+                BoxLayout:
+                    RegularLabel:
+                        text: "" 
+                        size_hint_x: None                
+                        width: 80
+
+                    # name header
+                    RegularLabel:
+                        text: "Name"
+                        size_hint_x: None                
+                        width: 700
+
+                    # money header
+                    RegularLabel:
+                        text: "Initial Money"
+
+                # the players rows
+                # player 1
+                PlayerSettings:
+                    id: _player1
+                    label_text: 'Player 1'
+                
+                # player 2
+                PlayerSettings:
+                    id: _player2
+                    label_text: 'Player 2'
+
+                # player 3
+                PlayerSettings:
+                    id: _player3
+                    label_text: 'Player 3'
+
+                # player 4
+                PlayerSettings:
+                    id: _player4
+                    label_text: 'Player 4'
+
+        ### ENDING CONDITIONS ###
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10
+                    width: 2
+
+            orientation: 'vertical' 
+            size_hint: (1, .4) 
+            padding: 10
+            spacing: 10    
+
+            # title label
+            TitleLabel:
+                text: "Ending Conditions"
+
+            # radio buttons
+            GridLayout:
+                rows: 3
+                spacing: 10
+
+                # option 1: money
+                ConditionRadioButton:
+                    active: root.game.end_by_money
+                    on_active: if self.active: root.game.set_ending_condition('money') 
+                RegularLabel:
+                    text: "The game is over when there is only one player with any money left."
+
+                # option 2: races
+                ConditionRadioButton:
+                    active: root.game.end_by_races
+                    on_active: if self.active: root.game.set_ending_condition('races') 
+
+                BoxLayout:                
+                    RegularLabel:
+                        text: "The game is over not later than after a given number of races."
+                    NumInput:
+
+                # option 3: time
+                ConditionRadioButton:
+                    active: root.game.end_by_time
+                    on_active: if self.active: root.game.set_ending_condition('time') 
+
+                BoxLayout:                
+                    RegularLabel:
+                        text: "The game is over not later than the total racing time has elapsed."
+                    NumInput:
+
+        ### READY BUTTON ###
+        RedButton:
+            text: 'Ready'
+            on_press: 
+                root.set_players(root.players)
+                root.set_slugs()
+                root.manager.current = 'racescreen'

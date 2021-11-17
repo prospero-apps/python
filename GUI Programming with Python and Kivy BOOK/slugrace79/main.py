@@ -1,0 +1,74 @@
+# File name: main.py
+
+from kivy.config import Config
+Config.set('graphics', 'width', '1200')
+Config.set('graphics', 'height', '675') 
+Config.set('graphics', 'resizable', '0')
+
+import kivy
+kivy.require('1.11.1')
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager
+from kivy.lang import Builder
+from player import Player
+
+# We need a BooleanProperty for the ending conditions.
+from kivy.properties import NumericProperty, BooleanProperty
+
+Builder.load_file('settings.kv')
+Builder.load_file('race.kv')
+Builder.load_file('gameover.kv')
+Builder.load_file('widgets.kv')
+Builder.load_file('slug.kv')
+
+class Game(ScreenManager):
+    # the players
+    player1 = Player()
+    player2 = Player()
+    player3 = Player()
+    player4 = Player()
+
+    number_of_players = NumericProperty(2)
+    players = [player1, player2]
+
+    # We will need these properties for the ending conditions.
+    end_by_money = BooleanProperty(True)
+    end_by_races = BooleanProperty(False)
+    end_by_time = BooleanProperty(False)
+
+    # callback methods
+    def on_number_of_players(self, instance, value):
+        if self.number_of_players == 1:
+            self.players = [self.player1]
+        elif self.number_of_players == 2:
+            self.players = [self.player1, self.player2]
+        elif self.number_of_players == 3:
+            self.players = [self.player1, self.player2, self.player3]
+        elif self.number_of_players == 4:
+            self.players = [self.player1, self.player2, self.player3, self.player4]
+
+    # This method will actually set the ending condition.
+    def set_ending_condition(self, condition):
+        if condition == 'money':
+            self.end_by_money = True
+            self.end_by_races = False
+            self.end_by_time = False            
+        elif condition == 'races':
+            self.end_by_money = False
+            self.end_by_races = True
+            self.end_by_time = False
+        elif condition == 'time':
+            self.end_by_money = False
+            self.end_by_races = False
+            self.end_by_time = True
+
+        print(self.end_by_money, self.end_by_races, self.end_by_time)
+
+class SlugraceApp(App):
+    def build(self):
+        return Game()
+
+if __name__ == '__main__':
+    from kivy.core.window import Window
+    Window.clearcolor = (1, 1, .8, 1)
+    SlugraceApp().run()
