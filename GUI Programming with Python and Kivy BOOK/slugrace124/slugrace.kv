@@ -1,0 +1,26 @@
+#:kivy 1.11.1
+# File name: slugrace.kv
+
+<Game>:
+    speedster: _racescreen.speedster
+    trusty: _racescreen.trusty
+    iffy: _racescreen.iffy
+    slowpoke: _racescreen.slowpoke
+    slugs: [self.speedster, self.trusty, self.iffy, self.slowpoke]
+    track: _racescreen.track
+
+    # This should be the first screen, 
+    # displayed right after the app 
+    # is launched.
+    SplashScreen:
+        name: 'splashscreen'
+
+    SettingsScreen:
+        name: 'settingsscreen'
+    RaceScreen:
+        id: _racescreen
+        name: 'racescreen'
+    GameoverScreen:
+        name: 'gameoverscreen'
+    InstructionsScreen:
+        name: 'instructionsscreen'

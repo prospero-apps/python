@@ -1,0 +1,14 @@
+#:kivy 1.11.1
+# File name: splash.kv
+#:import splash splash
+
+<SplashScreen>:    
+    canvas:
+        # The splash screen image will be drawn 
+        # in the background of the root widget.
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/splash screen.png'
+
+    game: root.manager
