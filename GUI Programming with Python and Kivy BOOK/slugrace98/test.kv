@@ -1,0 +1,41 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<CustomButton@Button>:
+    size_hint: None, None
+    size: 250, 50
+
+<TestLayout>: 
+    label: _label
+
+    CustomButton:
+        text: 'start animations'
+        pos: 20, 100    
+        on_press: root.start_animations()
+
+    CustomButton:
+        text: 'stop all animations'
+        pos: 400, 100     
+        on_press: root.stop_all_animations()
+
+    CustomButton:
+        text: 'stop color animations'
+        pos: 20, 20     
+        on_press: root.stop_color_animations()
+
+    CustomButton:
+        text: 'stop outline width animation'
+        pos: 400, 20     
+        on_press: root.stop_outline_animation()
+   
+    Label:
+        id: _label
+        pos_hint: {'center_x:': .5, 'center_y': .5}
+        text: 'L a b e l'
+        bold: True
+        
+        # properties to animate        
+        font_size: 50
+        outline_width: 0
+        color: [1, 0, 0, 1]
+        outline_color: [0, 1, 0, 1]

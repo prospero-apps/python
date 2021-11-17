@@ -1,0 +1,335 @@
+#:kivy 1.11.1
+# File name: race.kv
+#:import race race
+
+<RaceScreenManager>:
+    BetsScreen:
+        name: 'betsscreen'
+    ResultsScreen:
+        name: 'resultsscreen'
+
+<SlugStats>:     
+    spacing: 10
+    RegularLabel:
+        text: root.name
+    RegularLabel:
+        text: str(root.wins) + (' win' if root.wins == 1 else ' wins')
+    RegularLabel:   
+        text: str(root.win_percent) + '%'
+
+<PlayerStats>: 
+    text_color: [1, 0, 0, 1] if root.money == 0 else [.2, .1, 0, 1]
+    RegularLabel:
+        text: root.name
+        color: root.text_color
+    RegularLabel:
+        text: 'has $' + str(root.money)
+        color: root.text_color
+
+<SlugInfo>:
+    orientation: 'vertical'
+    size_hint: None, None
+    size: 100, 50
+    pos_hint: {'x': .004, 'center_y': root.y_position}
+
+    WhiteNameLabel:
+        text: root.name                 
+
+    WhiteWinsLabel:
+        text: str(root.wins) + (' win' if root.wins == 1 else ' wins')
+
+<RaceScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    game: root.manager 
+    
+    speedster: _speedster
+    trusty: _trusty
+    iffy: _iffy
+    slowpoke: _slowpoke
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+
+        ### INFO, STATS AND BUTTONS ###
+        GridLayout:
+            cols: 4
+            size_hint: 1, .5
+            spacing: 10
+
+            # Game Info
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: 'Game Info:'
+                BoxLayout:                    
+                    RegularLabel:
+                        size_hint: (2.5, 1)
+                        text: 'Race No'
+                    RegularLabel: 
+                        text: str(root.game.race_number) 
+  
+                BoxLayout:
+                    opacity: int(not root.game.end_by_money)                                                      
+                    RegularLabel: 
+                        size_hint: (2.5, 1)                        
+                        text: 'Number of races set:' if root.game.end_by_races else 'Time set:' 
+                    RegularLabel:
+                        text: str(root.game.number_of_races) if root.game.end_by_races else root.game.time_set         
+                BoxLayout:
+                    opacity: int(not root.game.end_by_money)
+                    RegularLabel: 
+                        size_hint: (2.5, 1)
+                        text: 'Races finished:' if root.game.end_by_races else 'Time elapsed:' 
+                    RegularLabel:
+                        text: str(root.game.races_finished) if root.game.end_by_races else root.game.time_elapsed      
+                BoxLayout:
+                    opacity: int(not root.game.end_by_money)
+                    RegularLabel:
+                        size_hint: (2.5, 1)
+                        text: 'Races to go:' if root.game.end_by_races else 'Time remaining:' 
+                    RegularLabel:
+                        text: str(root.game.races_to_go) if root.game.end_by_races else root.game.time_remaining
+
+            # Slugs' Stats           
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: "Slugs' Stats"
+                
+                SlugStats:
+                    name: 'Speedster'
+                    wins: _speedster.wins
+                    win_percent: _speedster.win_percent
+
+                SlugStats:
+                    name: 'Trusty'
+                    wins: _trusty.wins
+                    win_percent: _trusty.win_percent
+
+                SlugStats:
+                    name: 'Iffy'
+                    wins: _iffy.wins
+                    win_percent: _iffy.win_percent
+
+                SlugStats:
+                    name: 'Slowpoke'
+                    wins: _slowpoke.wins
+                    win_percent: _slowpoke.win_percent
+
+            # Players' Stats           
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: .2, .1, 0, 1
+                    Line:
+                        rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                        width: 2
+
+                orientation: 'vertical'
+                padding: 10
+
+                BoldLabel:
+                    text: "Players' Stats"                                
+
+                PlayerStats:
+                    name: root.game.player1.name
+                    money: root.game.player1.money      
+
+                PlayerStats:
+                    name: root.game.player2.name
+                    money: root.game.player2.money
+                    opacity: int(root.game.number_of_players >= 2)
+
+                PlayerStats:
+                    name: root.game.player3.name
+                    money: root.game.player3.money 
+                    opacity: int(root.game.number_of_players >= 3)
+
+                PlayerStats:
+                    name: root.game.player4.name
+                    money: root.game.player4.money 
+                    opacity: int(root.game.number_of_players == 4)   
+
+            # Buttons
+            BoxLayout:
+                orientation: 'vertical'   
+                spacing: 3 
+                size_hint: .7, 1               
+                
+                RedButton:
+                    text: 'End Game'  
+                    pos_hint: {'right': 1}
+                    on_press: root.game.gameover(manual=True)
+
+                RedButton:
+                    text: 'Instructions'   
+                    pos_hint: {'right': 1}
+                
+                RedButton: 
+                    text: 'Sound'
+                    pos_hint: {'right': 1}
+                    size: 70, 40
+        
+        ### THE TRACK ###
+        BoxLayout:  
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+        
+            padding: 10
+
+            # Track Image
+            RelativeLayout:
+                size_hint: None, None
+                size: 1000, 200
+                pos_hint: {'center_y': .5}    
+                Image:
+                    source: 'assets/racetrack.png'
+
+                # white labels with slug info            
+                # Speedster
+                SlugInfo:
+                    y_position: _speedster.y_position
+                    name: 'Speedster'
+                    wins: _speedster.wins
+
+                # Trusty
+                SlugInfo:
+                    y_position: _trusty.y_position
+                    name: 'Trusty'
+                    wins: _trusty.wins
+
+                # Iffy
+                SlugInfo:
+                    y_position: _iffy.y_position
+                    name: 'Iffy'
+                    wins: _iffy.wins
+
+                # Slowpoke
+                SlugInfo:
+                    y_position: _slowpoke.y_position
+                    name: 'Slowpoke'
+                    wins: _slowpoke.wins
+
+                # the odds labels
+                # Speedster
+                WhiteOddsLabel:
+                    text: '{:.2f}'.format(_speedster.odds)                
+                    pos_hint: {'x': .77, 'center_y': _speedster.y_position}
+
+                # Trusty
+                WhiteOddsLabel:
+                    text: '{:.2f}'.format(_trusty.odds)               
+                    pos_hint: {'x': .77, 'center_y': _trusty.y_position}
+
+                # Iffy
+                WhiteOddsLabel:
+                    text: '{:.2f}'.format(_iffy.odds)                
+                    pos_hint: {'x': .77, 'center_y': _iffy.y_position}
+
+                # Slowpoke
+                WhiteOddsLabel:
+                    text: '{:.2f}'.format(_slowpoke.odds)                
+                    pos_hint: {'x': .77, 'center_y': _slowpoke.y_position}
+
+                # the slugs
+                # Speedster
+                Slug:
+                    id: _speedster
+                    name: 'Speedster'
+                    body_image: 'speedsterBody'
+                    eye_image: 'speedsterEye'
+                    y_position: .875
+                    front_image: 'atlas://assets/silhouettes/silhouettes/Speedster'
+                
+                # Trusty
+                Slug:
+                    id: _trusty
+                    name: 'Trusty'
+                    body_image: 'trustyBody'
+                    eye_image: 'trustyEye'
+                    y_position: .625
+                    front_image: 'atlas://assets/silhouettes/silhouettes/Trusty'
+
+                # Iffy
+                Slug:
+                    id: _iffy
+                    name: 'Iffy'
+                    body_image: 'iffyBody'
+                    eye_image: 'iffyEye'
+                    y_position: .375
+                    front_image: 'atlas://assets/silhouettes/silhouettes/Iffy'
+
+                # Slowpoke
+                Slug:
+                    id: _slowpoke
+                    name: 'Slowpoke'
+                    body_image: 'slowpokeBody'
+                    eye_image: 'slowpokeEye'
+                    y_position: .125
+                    front_image: 'atlas://assets/silhouettes/silhouettes/Slowpoke'
+
+            # Winner
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (.18, 1)
+
+                Label:
+                    color: .2, .1, 0, 1
+                    text: '' if not root.game.race_winner else "The winner is"
+                    font_size: 24
+                    size_hint: 1, .2
+                    bold: True
+
+                Label:
+                    color: .2, .1, 0, 1
+                    text: '' if not root.game.race_winner else root.game.race_winner.name
+                    font_size: 32
+                    size_hint: 1, .2
+                    bold: True
+
+                Image:
+                    opacity: 1 if root.game.race_winner else 0
+                    source: '' if not root.game.race_winner else root.game.race_winner.front_image
+        
+        ### THE BETS ###
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+
+            padding: 5
+
+            RaceScreenManager:
