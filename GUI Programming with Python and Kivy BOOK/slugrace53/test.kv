@@ -1,0 +1,55 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:
+    canvas.before:
+        # red square
+        Color:
+            rgba: 1, 0, 0, 1              
+        Rectangle:
+            pos: 0, 0
+            size: 100, 100
+
+        # green square
+        Color:
+            rgba: 0, 1, 0, 1              
+        Rectangle:
+            pos: 80, 0
+            size: 100, 100
+        
+    canvas.after:
+        # blue square
+        Color:
+            rgba: 0, 0, 1, 1              
+        Rectangle:
+            pos: 0, 80
+            size: 100, 100
+
+        # yellow square
+        Color:
+            rgba: 1, 1, 0, 1              
+        Rectangle:
+            pos: 80, 80
+            size: 100, 100
+
+    # label with a gray rectangle
+    Label:
+        canvas.before:
+            Color:
+                rgba: .5, .5, .5, .9              
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        canvas.after:
+            Color:
+                rgba: .8, .8, .8, 1              
+            Rectangle:
+                pos: self.pos
+                size: self.width, self.height / 2
+        
+        text: 'label' 
+        font_size: 80       
+        size_hint: None, None
+        y: 70
+        size: 300, 40

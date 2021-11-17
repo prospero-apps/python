@@ -1,0 +1,25 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:
+    canvas:    
+        Color:
+            rgba: 0, 0, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        
+    orientation: 'vertical'
+
+    Button:
+        canvas:    
+            Color:
+                rgba: 1, 0, 0, 1              
+            Rectangle:
+                pos: self.pos
+                size: self.size      
+
+        size_hint_x: .5
+        pos_hint: {'center_x': .5}
+        
+        on_press: self.canvas.clear(); print(root.children)
