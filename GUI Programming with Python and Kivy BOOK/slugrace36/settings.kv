@@ -1,0 +1,299 @@
+#:kivy 1.11.1
+# File name: settings.kv
+
+<SettingsScreen>:
+    orientation: 'vertical'
+    
+    ### SETTINGS LABEL ###
+    Label:
+        text: 'Settings'
+        font_size: 28
+        size_hint: (1, None)
+        height: 30
+
+    ### THE PLAYERS ###  
+    BoxLayout:
+        orientation: 'vertical'
+        
+        # Title         
+        Label:
+            text: 'The Players'
+
+            # <1> Let's make the font slightly bigger, like 20 pixels.
+            font_size: 20
+
+            # <2> This label should occupy the whole width, its height should be 30 px.
+            size_hint: (1, None)
+            height: 30
+
+        # Radio Buttons 
+        BoxLayout:
+
+            # <3> The whole Radio Buttons subarea should occupy 40% of the width 
+            # and should be 50 px high.
+            size_hint: (.4, None)
+            height: 50
+            
+            # 1 player
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+
+                    # <4> The check box should occupy half the width of the containing
+                    # BoxLayout and its whole height.
+                    size_hint: (.5, 1) 
+                Label:
+                    text: '1 player'
+
+            # Use the same value for the other check boxes.
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+
+                    # <4> 
+                    size_hint: (.5, 1) 
+                Label:
+                    text: '2 players'
+
+            # 3 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+
+                    # <4> 
+                    size_hint: (.5, 1) 
+                Label:
+                    text: '3 players'
+
+            # 4 players
+            BoxLayout:
+                CheckBox:
+                    group: 'players'
+
+                    # <4> 
+                    size_hint: (.5, 1) 
+                Label:
+                    text: '4 players'
+
+        # Player Name and Initial Money Setup 
+        BoxLayout:
+            orientation: 'vertical'
+
+            # the headers row
+            BoxLayout:
+                Label:
+                    text: "" 
+
+                    # <5> The width of the label should be 80 px.
+                    size_hint_x: None                
+                    width: 80
+
+                # name header
+                Label:
+                    text: "Name"
+
+                    # <6> The width of the label should be 700 px.
+                    size_hint_x: None                
+                    width: 700
+
+                # money header
+                Label:
+                    text: "Initial Money"
+
+            # the players rows
+            # player 1
+            BoxLayout:
+                Label:
+                    text: 'Player 1'
+
+                    # <7> This label should be 80x30 px.
+                    size_hint: None, None
+                    size: 80, 30
+                
+                TextInput:
+                    multiline: False
+
+                    # <8> This text input should be 400x30 px.
+                    size_hint: None, None                    
+                    size: 400, 30
+
+                BoxLayout:
+                    Label:
+                        text: ""
+
+                        # <9> This label should be 280 px wide.
+                        size_hint_x: None                
+                        width: 280
+                                      
+                    Label:
+                        text: "$"
+
+                        # <10> This label should be 20x30 px.
+                        size_hint: None, None
+                        size: 20, 30
+
+                    TextInput:
+                        multiline: False
+
+                        # <11> This text input should be 250x30 px.
+                        size_hint: None, None                        
+                        size: 250, 30
+
+            # Use the same values for players 2-4
+            BoxLayout:
+                Label:
+                    text: 'Player 2'
+                    size_hint: None, None
+                    size: 80, 30
+
+                TextInput:
+                    multiline: False
+                    size_hint: None, None                    
+                    size: 400, 30
+
+                BoxLayout:
+                    Label:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    Label:
+                        text: "$"
+                        size_hint: None, None
+                        size: 20, 30
+
+                    TextInput:
+                        multiline: False
+                        size_hint: None, None                        
+                        size: 250, 30
+
+            # player 3
+            BoxLayout:
+                Label:
+                    text: 'Player 3'
+                    size_hint: None, None
+                    size: 80, 30
+
+                TextInput:
+                    multiline: False
+                    size_hint: None, None                    
+                    size: 400, 30
+
+                BoxLayout:
+                    Label:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    Label:
+                        text: "$"
+                        size_hint: None, None
+                        size: 20, 30
+
+                    TextInput:
+                        multiline: False
+                        size_hint: None, None                        
+                        size: 250, 30
+
+            # player 4
+            BoxLayout:
+                Label:
+                    text: 'Player 4'
+                    size_hint: None, None
+                    size: 80, 30
+
+                TextInput:
+                    multiline: False
+                    size_hint: None, None                    
+                    size: 400, 30
+
+                BoxLayout:
+                    Label:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    Label:
+                        text: "$"
+                        size_hint: None, None
+                        size: 20, 30
+
+                    TextInput:
+                        multiline: False     
+                        size_hint: None, None                        
+                        size: 250, 30       
+
+    ### ENDING CONDITIONS ###
+    BoxLayout:
+        orientation: 'vertical' 
+
+        # <12> This area should occupy the whole width 
+        # and 40% of the available height.
+        size_hint: (1, .4)       
+
+        # title label
+        Label:
+            text: "Ending Conditions"
+
+            # <1> 
+            font_size: 20
+
+            # <2> 
+            size_hint: (1, None)
+            height: 30
+
+        # radio buttons
+        GridLayout:
+            rows: 3
+
+            # option 1: money
+            CheckBox:
+                group: 'conditions'
+
+                # <13> The width should be 5% of the available width.
+                size_hint_x: .05
+
+            Label:
+                text: "The game is over when there is only one player with any money left."
+
+            # option 2: races
+            CheckBox:
+                group: 'conditions'
+
+                # <13> 
+                size_hint_x: .05
+
+            BoxLayout:                
+                Label:
+                    text: "The game is over not later than after a given number of races."
+                TextInput:
+                    multiline: False
+                    
+                    # <11> 
+                    size_hint: None, None                    
+                    size: 250, 30
+
+            # option 3: time
+            CheckBox:
+                group: 'conditions'
+
+                # <13> 
+                size_hint_x: .05
+
+            BoxLayout:                
+                Label:
+                    text: "The game is over not later than the total racing time has elapsed."
+                TextInput:
+                    multiline: False
+
+                    # <11> 
+                    size_hint: None, None                    
+                    size: 250, 30
+
+    ### READY BUTTON ###
+    Button:
+        text: 'Ready'
+        size_hint: (None, None)        
+        size: 200, 40
+        pos_hint: {'center_x': 0.5}
+
