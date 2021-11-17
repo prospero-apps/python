@@ -1,0 +1,14 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:
+    CustomButton:
+        text: str(self.vowels)     
+        font_size: 50   
+        size_hint_x: .5
+    
+    CustomButton:
+        text: str(self.vowels)
+        font_size: 50  
+        size_hint_x: .5
+        pos_hint: {'x': .5}

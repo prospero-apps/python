@@ -1,0 +1,47 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:  
+    # Let's use the CustomLabel.
+    CustomLabel:
+        # The text on the label should be the info
+        # text defined and updated in the Python file.
+        text: self.info
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'top': 1}
+
+    BoxLayout:        
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'top': 1}
+
+        CustomButton:
+            text: str(self.counter)
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            CustomButton:
+                text: str(self.counter)
+
+            Slider:
+                min: 100
+                max: 200
+                value: 150
+                orientation: 'vertical'
+
+            CustomButton:
+                text: str(self.counter)
+            
+        CustomButton:
+            text: str(self.counter)
+
+    CustomButton:
+        text: str(self.counter)
+        size_hint: .5, .5
+        pos_hint: {'x': 0, 'y': 0}
+
+    # Again, let's use the CustomLabel.
+    CustomLabel:
+        text: self.info
+        size_hint: .5, .5
+        pos_hint: {'x': .5, 'y': 0}
