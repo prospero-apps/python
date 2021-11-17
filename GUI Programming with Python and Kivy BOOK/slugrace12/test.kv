@@ -1,0 +1,14 @@
+# File name: test.kv
+
+<Slider>:
+    min: -100
+    max: 200
+    value: 0
+    
+    value_track: True
+    value_track_color: [1, 0, 0, .8]
+    value_track_width: 10
+
+    on_touch_down: self.value_track_width = 20
+    on_touch_move: self.value_track_color = [1, 0, 0, .8] if self.value < 0 else [0, 1, 0, .8]
+    on_touch_up: self.value_track_width = 10

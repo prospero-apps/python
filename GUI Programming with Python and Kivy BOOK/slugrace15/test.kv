@@ -1,0 +1,30 @@
+# File name: test.kv
+
+<MyCustomWidget>:     
+    TextInput:
+        hint_text: 'Type something'
+        pos: 20, 150
+        size: 300, 40
+    Button:
+        text: 'Press Me'
+        pos: 20, 20
+        size: 120, 40
+        color: .7, .6, .4, 1
+    Button:
+        text: 'Press Me Too'
+        pos: 200, 20
+        size: 120, 40
+        color: .7, .6, .4, 1
+    Slider:        
+        min: 0
+        max: 100
+        value: 25
+        pos: 20, 60
+        width: 300
+    Slider: 
+        orientation: 'vertical'       
+        min: 0
+        max: 100
+        value: 25
+        pos: 320, 20
+        height: 180

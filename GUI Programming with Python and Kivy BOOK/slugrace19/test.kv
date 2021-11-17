@@ -1,0 +1,34 @@
+# File name: test.kv
+
+<CustomButton@Button>:
+    size_hint: .2, .1
+    on_press: self.text = 'MOVED'
+    on_press: self.disabled = True
+
+<FloatLayout>:     
+    ToggleButton:
+        text: 'SMALL'
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        size_hint: .2, .3
+        on_state: self.text = 'SMALL' if self.state == 'normal' else 'BIG'
+        on_state: self.size_hint = (.2, .3) if self.state == 'normal' else (.4, .4)
+        
+    CustomButton:
+        text: 'MOVE UP'
+        pos_hint: {'x': .1, 'y': .1}
+        on_press: self.pos_hint = {'x': .1, 'center_y': .5}
+
+    CustomButton:
+        text: 'MOVE RIGHT'
+        pos_hint: {'x': .1, 'top': .9}
+        on_press: self.pos_hint = {'center_x': .5, 'top': .9}
+
+    CustomButton:
+        text: 'MOVE DOWN'
+        pos_hint: {'right': .9, 'top': .9}
+        on_press: self.pos_hint = {'right': .9, 'center_y': .5}
+
+    CustomButton:
+        text: 'MOVE LEFT'
+        pos_hint: {'right': .9, 'y': .1}
+        on_press: self.pos_hint = {'center_x': .5, 'y': .1}

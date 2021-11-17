@@ -1,0 +1,20 @@
+# File name: test.kv
+
+<CustomButton@Button>:
+    text: 'width = ' + str(self.width) + '\nheight = ' + str(self.height)
+    
+<FloatLayout>:     
+    CustomButton:
+        pos_hint: {'x': .1, 'y': .1}
+        size_hint: .2, .2
+        
+    CustomButton:
+        pos_hint: {'x': .4, 'y': .1}
+        size_hint_x: None
+        size_hint_y: .5
+        width: 200
+
+    CustomButton:
+        pos_hint: {'x': .7, 'y': .1}
+        size_hint: None, None
+        size: 200, 200

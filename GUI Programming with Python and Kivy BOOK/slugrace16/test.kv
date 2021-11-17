@@ -1,0 +1,38 @@
+# File name: test.kv
+
+<MyCustomButton>:
+    size: 120, 40
+    color: .7, .6, .4, 1
+
+<MyCustomSlider>:    
+    min: 0
+    max: 100
+    value: 25
+
+# Here's the new class that inherits 
+# from MyCustomSlider.
+<MyCustomVerticalSlider@MyCustomSlider>:    
+    orientation: 'vertical'
+    height: 180
+
+<MyCustomWidget>: 
+    TextInput:
+        hint_text: 'Type something'
+        pos: 20, 150
+        size: 300, 40    
+    MyCustomButton:
+        text: 'Press Me'
+        pos: 20, 20
+    MyCustomButton:
+        text: 'Press Me Too'
+        pos: 200, 20
+    MyCustomSlider:
+        pos: 20, 60
+        width: 300
+
+    # the two custom vertical sliders
+    MyCustomVerticalSlider:
+        pos: 320, 20
+    MyCustomVerticalSlider:
+        pos: 400, 20
+        max: 200
