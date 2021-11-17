@@ -1,0 +1,18 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+### A 4x4 GRIDLAYOUT WHERE WE ARE GOING TO DRAW SHAPES ###
+<TestScreen>:
+    cols: 4
+    spacing: 4
+    padding: 10
+          
+    # Shape 1 - A Rectangle on a BoxLayout
+    BoxLayout:
+        canvas:
+            Rectangle:
+                pos: self.x, self.y
+                size: self.width/2, self.height/2
+            Rectangle:
+                pos: self.center_x, self.center_y
+                size: self.width/2, self.height/2

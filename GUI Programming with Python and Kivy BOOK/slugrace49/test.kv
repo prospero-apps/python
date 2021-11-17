@@ -1,0 +1,163 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+### A 4x4 GRIDLAYOUT WHERE WE ARE GOING TO DRAW SHAPES ###
+<TestScreen>:
+    cols: 4
+    spacing: 4
+    padding: 10
+          
+    # Shape 1 - A Rectangle on a BoxLayout
+    BoxLayout:
+        canvas:
+            Rectangle:
+                pos: self.x, self.y
+                size: self.width, self.height
+
+    # Shape 2 - An Ellipse on a Button
+    Button:
+        canvas:
+            Ellipse:
+                pos: self.center_x - 50, self.center_y - 25
+                size: 100, 60
+
+    # Shape 3 - A Triangle on a Label
+    Label:
+        canvas:
+            Ellipse:
+                segments: 3
+                pos: self.x, self.y
+                size: self.width - 10, self.height - 10
+
+    # Shape 4 - A Hexagon on a Button
+    Button:
+        canvas:
+            Ellipse:
+                segments: 6
+                pos: self.x, self.y
+                size: self.width - 10, self.height - 10
+
+    # Shape 5 - Two Circle Segments on a Label
+    Label:
+        canvas:
+            Ellipse:
+                angle_start: 90
+                angle_end: 360
+                pos: self.x, self.y
+                size: 80, 80
+            Ellipse:
+                angle_start: 270
+                angle_end: 540
+                pos: self.x + 40, self.y + 40
+                size: 80, 80
+
+    # Shape 6 - Rounded Rectangles on a BoxLayout
+    BoxLayout:
+        canvas:
+            RoundedRectangle:
+                pos: self.x, self.y
+                size: self.width / 3, self.height / 3
+                radius: [10]
+            RoundedRectangle:
+                pos: self.x + 100, self.y
+                size: self.width / 3, self.height / 3
+                radius: [2, 5, 20, 40]
+
+    # Shape 7 - Lines on a Button
+    Button:
+        canvas:
+            Line:                    
+                points: self.x + 20, self.y + 20, self.x + 120, self.y + 40, self.x + 150, self.y + 10          
+            Line:                    
+                points: self.x + 20, self.y + 70, self.x + 120, self.y + 90, self.x + 150, self.y + 60
+                width: 6
+                cap: 'round'
+                joint: 'none'
+
+            Line:                    
+                points: self.x + 20, self.y + 120, self.x + 120, self.y + 140, self.x + 150, self.y + 110
+                width: 6
+                joint: 'bevel'
+                close: True
+
+    # Shape 8 - A Triangle on a BoxLayout
+    BoxLayout:
+        canvas:
+            Triangle:                    
+                points: self.x + 10, self.y + 50, self.x + 150, self.y + 10, self.x + 180, self.y + 200
+
+    # Shape 9 - A Quad on a Slider
+    Slider:
+        canvas:
+            Quad:                    
+                points: self.x + 20, self.y + 10, self.x + 25, self.y + 90, self.x + 140, self.y + 170, self.x + 170, self.y + 50
+
+    # Shape 10 - Points on a Button
+    Button:
+        canvas:
+            Point:
+                points: self.x + 50, self.y + 10, self.x + 100, self.y + 10, self.x + 150, self.y + 10
+            Point:
+                points: self.x + 50, self.y + 40, self.x + 100, self.y + 40, self.x + 150, self.y + 40
+                pointsize: 5
+
+    # Shape 11 - Bezier Curves on a Button
+    Button:
+        canvas:
+            Bezier:
+                points: self.x + 20, self.y + 10, self.x + 25, self.y + 90, self.x + 140, self.y + 170, self.x + 170, self.y + 50                    
+            Bezier:
+                points: self.x + 20, self.y + 60, self.x + 60, self.y + 140, self.x + 20, self.y + 210, self.x + 100, self.y + 220
+                segments: 10
+            Bezier:
+                points: self.x + 20, self.y + 90, self.x + 20, self.y + 150, self.x + 80, self.y + 230, self.x + 200, self.y + 90
+                segments: 200
+                dash_length: 10
+                dash_offset: 15
+
+    # Shape 12 - A Mesh on a BoxLayout
+    BoxLayout:
+        canvas:
+            Mesh:
+                mode: 'triangle_fan'
+                vertices: self.x + 80, self.y + 50, 0, 0, self.x + 20, self.y + 50, 0, 0, self.x + 40, self.y + 10, 0, 0, self.x + 100, self.y + 10, 0, 0, self.x + 140, self.y + 120, 0, 0
+                indices: 0, 1, 2, 3, 4
+
+    # Shape 13 - An Arc of a Circle on a Label
+    Label:
+        canvas:
+            Line:
+                # The 2 o'clock position corresponds to 60 degrees
+                # and the 6 o'clock position to 180 degrees.
+                circle: self.x + 100, self.y + 70, 60, 60, 180, 20
+                width: 3  
+
+    # Shape 14 - The Border of a Rounded Rectangle on a Button
+    Button:
+        canvas:
+            Line:
+                rounded_rectangle: self.x + 80, self.y + 20, 120, 120, 20
+                width: 3
+
+    # Shape 15 - A Decagon on a Label
+    Label:
+        canvas:
+            Line:
+                circle: self.center_x, self.center_y, 70, 0, 360, 10
+                width: 2  
+
+    # Shape 16 - A Smiley on a Label
+    Label:
+        canvas:
+            Line:
+                circle: self.center_x - 50, self.center_y + 30, 20, 180, 450
+                width: 2
+                close: True
+            Line:
+                circle: self.center_x + 50, self.center_y + 30, 20, 270, 540
+                width: 2
+                close: True
+            Line:
+                ellipse: self.center_x - 70, self.center_y - 70, 140, 100, 90, 270                
+                width: 2
+                close: True

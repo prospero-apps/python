@@ -1,0 +1,64 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+### A 4x4 GRIDLAYOUT WHERE WE ARE GOING TO DRAW SHAPES ###
+<TestScreen>:
+    cols: 4
+    spacing: 4
+    padding: 10
+          
+    # Shape 1 - A Rectangle on a BoxLayout
+    BoxLayout:
+        canvas:
+            Rectangle:
+                pos: self.x, self.y
+                size: self.width, self.height
+
+    # Shape 2 - An Ellipse on a Button
+    Button:
+        canvas:
+            Ellipse:
+                pos: self.center_x - 50, self.center_y - 25
+                size: 100, 60
+
+    # Shape 3 - A Triangle on a Label
+    Label:
+        canvas:
+            Ellipse:
+                segments: 3
+                pos: self.x, self.y
+                size: self.width - 10, self.height - 10
+
+    # Shape 4 - A Hexagon on a Button
+    Button:
+        canvas:
+            Ellipse:
+                segments: 6
+                pos: self.x, self.y
+                size: self.width - 10, self.height - 10
+
+    # Shape 5 - Two Circle Segments on a Label
+    Label:
+        canvas:
+            Ellipse:
+                angle_start: 90
+                angle_end: 360
+                pos: self.x, self.y
+                size: 80, 80
+            Ellipse:
+                angle_start: 270
+                angle_end: 540
+                pos: self.x + 40, self.y + 40
+                size: 80, 80
+
+    # Shape 6 - Rounded Rectangles on a BoxLayout
+    BoxLayout:
+        canvas:
+            RoundedRectangle:
+                pos: self.x, self.y
+                size: self.width / 3, self.height / 3
+                radius: [10]
+            RoundedRectangle:
+                pos: self.x + 100, self.y
+                size: self.width / 3, self.height / 3
+                radius: [2, 5, 20, 40]
