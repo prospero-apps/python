@@ -1,0 +1,129 @@
+#:kivy 1.11.1
+# File name: bets.kv
+#:import bets bets
+
+<Bet>:
+    spacing: 10 
+    opacity: int(not self.disabled)
+           
+    RegularLabel:
+        text: root.player_name    
+    RegularLabel:                    
+        text: 'bets'
+        size_hint: (.4, 1)    
+    BoxLayout: 
+        spacing: 5                                   
+        RegularLabel: 
+            text: '$'
+            halign: 'right'                        
+        BetInput: 
+            text: str(root.bet_amount)  
+
+            # Here's the hint text.
+            hint_text: '(1 - {})'.format(root.max_bet_amount) 
+
+            # Here are the limits.
+            min_value: 1
+            max_value: root.max_bet_amount
+                          
+    Slider:
+        min: 1
+        max: root.max_bet_amount                             
+        value: root.bet_amount
+        step: 1                        
+    RegularLabel:
+        text: 'on'
+        size_hint: (.3, 1)    
+    BoxLayout:  
+        PlayerSlugButton:
+            group: root.player_group                 
+        RegularLabel:
+            text: 'Speedster'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group        
+        RegularLabel:
+            text: 'Trusty'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group        
+        RegularLabel:
+            text: 'Iffy'    
+    BoxLayout:
+        PlayerSlugButton:
+            group: root.player_group            
+        RegularLabel:
+            text: 'Slowpoke' 
+
+<BetsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+    
+    game: root.manager.parent.parent.parent.manager
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        ### TITLE LABEL ###
+        BoldLabel:
+            text: "Bets"
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER BETS ###
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Bet:
+                player_name: root.game.player1.name 
+                bet_amount: root.game.player1.bet
+                max_bet_amount: root.game.player1.money 
+                player_group: 'player1'
+
+                # Here's the event that will be triggered whenever the bet_amount 
+                # property changes. Then the method will be called that we just defined.
+
+                # In this instance of Bet we'll pass player1 as the argument, for the 
+                # other instances we'll pass the other corresponding player objects.
+                on_bet_amount: self.update_player_bet(root.game.player1)              
+
+            # player 2
+            Bet:
+                player_name: root.game.player2.name 
+                bet_amount: root.game.player2.bet
+                max_bet_amount: root.game.player2.money 
+                player_group: 'player2'
+                disabled: root.game.number_of_players < 2
+                on_bet_amount: self.update_player_bet(root.game.player2)  
+
+            # player 3
+            Bet:
+                player_name: root.game.player3.name 
+                bet_amount: root.game.player3.bet
+                max_bet_amount: root.game.player3.money 
+                player_group: 'player3'
+                disabled: root.game.number_of_players < 3
+                on_bet_amount: self.update_player_bet(root.game.player3)
+
+            # player 4
+            Bet:
+                player_name: root.game.player4.name 
+                bet_amount: root.game.player4.bet
+                max_bet_amount: root.game.player4.money 
+                player_group: 'player4'
+                disabled: root.game.number_of_players < 4
+                on_bet_amount: self.update_player_bet(root.game.player4)
+
+        ### GO BUTTON ###
+        RedButton:
+            text: 'Go'
+            on_press: 
+                root.manager.current = 'resultsscreen'
+                root.manager.transition.direction = 'left'
