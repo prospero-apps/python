@@ -1,0 +1,46 @@
+#:kivy 1.11.1
+# File name: gameover.kv
+#:import gameover gameover
+
+<GameoverScreen>: 
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    game: root.manager
+    
+    BoxLayout:
+        orientation: 'vertical'   
+     
+        BoldLabel:
+            font_size: 100
+            text: 'Game Over'
+            halign: 'center'
+        BoldLabel:
+            font_size: 40
+            text: root.game.game_over_reason
+            halign: 'center'
+        BoldLabel:
+            # The font size depends on the length of the text. It's between
+            # 20 (if there are 4 joint winners, so the text is pretty long)
+            # and 30 (if there's just one winner).
+            font_size: 30 - ((len(root.game.winner_text) - 150) // 10)
+            text: root.game.winner_text
+            halign: 'center'  
+
+        # the buttons         
+        BoxLayout: 
+            spacing: 50            
+            pos_hint: {'center_x': .5, 'center_y': .5} 
+            size_hint: None, None
+            size: 450, 200   
+            RedButton:
+                text: 'Play Again'
+                pos_hint: {'x': 0, 'center_y': .5}
+                on_press: root.manager.current = 'settingsscreen'
+            RedButton:
+                text: 'Quit'
+                pos_hint: {'right': 1, 'center_y': .5} 

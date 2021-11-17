@@ -1,0 +1,182 @@
+#:kivy 1.11.1
+# File name: bets.kv
+#:import bets bets
+
+<Bet>:
+    spacing: 10 
+    opacity: int(not self.disabled)
+    slug_buttons: [_speedsterButton, _trustyButton, _iffyButton, _slowpokeButton]
+           
+    RegularLabel:
+        text: root.player_name    
+    RegularLabel:                    
+        text: 'bets'
+        size_hint: (.4, 1)    
+    BoxLayout: 
+        spacing: 5                                   
+        RegularLabel: 
+            text: '$'
+            halign: 'right'                        
+        BetInput: 
+            text: str(root.bet_amount) 
+            hint_text: '(1 - {})'.format(root.max_bet_amount) 
+            min_value: 1
+            max_value: root.max_bet_amount 
+            on_text: _slider.value = min(int(self.text), root.max_bet_amount) if self.text else self.min_value                         
+    Slider:
+        id: _slider
+        min: 1
+        max: root.max_bet_amount                             
+        value: root.bet_amount
+        step: 1 
+        on_value: root.bet_amount = self.value 
+                  
+    RegularLabel:
+        text: 'on'
+        size_hint: (.3, 1)    
+    BoxLayout:  
+        PlayerSlugButton:
+            id: _speedsterButton
+            group: root.player_group  
+            on_active: root.selected_slug = 1 if self.active else 0                    
+        RegularLabel:
+            text: 'Speedster'    
+    BoxLayout:
+        PlayerSlugButton:            
+            id: _trustyButton
+            group: root.player_group
+            on_active: root.selected_slug = 2 if self.active else 0        
+        RegularLabel:
+            text: 'Trusty'    
+    BoxLayout:
+        PlayerSlugButton:
+            id: _iffyButton
+            group: root.player_group
+            on_active: root.selected_slug = 3 if self.active else 0        
+        RegularLabel:
+            text: 'Iffy'    
+    BoxLayout:
+        PlayerSlugButton:
+            id: _slowpokeButton
+            group: root.player_group  
+            on_active: root.selected_slug = 4 if self.active else 0          
+        RegularLabel:
+            text: 'Slowpoke' 
+
+<BetsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+    
+    game: root.manager.parent.parent.parent.manager
+    bets: [_bet1, _bet2, _bet3, _bet4]
+
+    # Here's the FloatLayout with four BankruptLabels.
+    FloatLayout:
+        BankruptLabel:
+            text: root.game.player1.name + self.bankrupt_text
+            pos: _bet1.pos
+            size: _bet1.size
+            opacity: int(root.game.player1.bankrupt)
+
+        BankruptLabel:
+            text: root.game.player2.name + self.bankrupt_text
+            pos: _bet2.pos
+            size: _bet2.size
+            opacity: int(root.game.player2.bankrupt)
+
+        BankruptLabel:
+            text: root.game.player3.name + self.bankrupt_text
+            pos: _bet3.pos
+            size: _bet3.size
+            opacity: int(root.game.player3.bankrupt)
+
+        BankruptLabel:
+            text: root.game.player4.name + self.bankrupt_text
+            pos: _bet4.pos
+            size: _bet4.size
+            opacity: int(root.game.player4.bankrupt)
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        ### TITLE LABEL ###
+        BoldLabel:
+            text: "Bets"
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER BETS ###
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Bet:
+                id: _bet1
+                player_name: root.game.player1.name 
+                bet_amount: root.game.player1.bet
+                max_bet_amount: root.game.player1.money 
+                player_group: 'player1'
+
+                # This bet will be disabled if Player 1 goes bankrupt.
+                disabled: root.game.player1.bankrupt         
+
+                on_bet_amount: self.update_player_bet(root.game.player1) 
+                on_selected_slug: root.select_slug(root.game.player1, self.selected_slug - 1)                            
+
+            # player 2
+            Bet:
+                id: _bet2
+                player_name: root.game.player2.name 
+                bet_amount: root.game.player2.bet
+                max_bet_amount: root.game.player2.money 
+                player_group: 'player2'
+
+                # also disabled if Player 2 goes bankrupt
+                disabled: root.game.number_of_players < 2 or root.game.player2.bankrupt
+
+                on_bet_amount: self.update_player_bet(root.game.player2)  
+                on_selected_slug: root.select_slug(root.game.player2, self.selected_slug - 1)
+
+            # player 3
+            Bet:
+                id: _bet3
+                player_name: root.game.player3.name 
+                bet_amount: root.game.player3.bet
+                max_bet_amount: root.game.player3.money 
+                player_group: 'player3'
+
+                # also disabled if Player 3 goes bankrupt
+                disabled: root.game.number_of_players < 3 or root.game.player3.bankrupt
+
+                on_bet_amount: self.update_player_bet(root.game.player3)
+                on_selected_slug: root.select_slug(root.game.player3, self.selected_slug - 1)
+
+            # player 4
+            Bet:
+                id: _bet4
+                player_name: root.game.player4.name 
+                bet_amount: root.game.player4.bet
+                max_bet_amount: root.game.player4.money 
+                player_group: 'player4'
+
+                # also disabled if Player 4 goes bankrupt
+                disabled: root.game.number_of_players < 4 or root.game.player4.bankrupt
+
+                on_bet_amount: self.update_player_bet(root.game.player4)
+                on_selected_slug: root.select_slug(root.game.player4, self.selected_slug - 1)
+
+        ### GO BUTTON ###
+        RedButton:
+            text: 'Go'
+            disabled: not root.all_slugs_selected
+            on_press: 
+                root.manager.current = 'resultsscreen'
+                root.manager.transition.direction = 'left'
+                root.game.go() # start race
+                root.clear_bets()

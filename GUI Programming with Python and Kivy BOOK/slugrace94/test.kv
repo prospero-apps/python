@@ -1,0 +1,14 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:    
+    button: _button
+
+    Button:
+        id: _button
+        text: 'button'
+        x: 20
+        y: 100        
+        size_hint: .2, .2
+
+        on_press: root.handle_move()

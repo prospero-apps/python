@@ -1,0 +1,19 @@
+#:kivy 1.11.1
+# File name: slugrace.kv
+
+<Game>:
+    speedster: _racescreen.speedster
+    trusty: _racescreen.trusty
+    iffy: _racescreen.iffy
+    slowpoke: _racescreen.slowpoke
+
+    # list of slugs
+    slugs: [self.speedster, self.trusty, self.iffy, self.slowpoke]
+
+    SettingsScreen:
+        name: 'settingsscreen'
+    RaceScreen:
+        id: _racescreen
+        name: 'racescreen'
+    GameoverScreen:
+        name: 'gameoverscreen'
