@@ -1,0 +1,17 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>: 
+    ToggleButton:
+        size_hint: None, None
+        size: 250, 100
+        pos_hint: {'center_y': .5}
+        font_size: 28
+        text: 'Background Music'  
+        on_state: root.toggle_music()
+
+    Slider:
+        min: 0
+        max: 1
+        value: 1
+        on_value: root.change_volume(self.value)

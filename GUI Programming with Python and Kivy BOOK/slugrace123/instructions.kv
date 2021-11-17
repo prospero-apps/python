@@ -1,0 +1,34 @@
+#:kivy 1.11.1
+# File name: instructions.kv
+#:import instructions instructions
+
+<InstructionsScreen>:
+    canvas.before:
+        # black background
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+        
+        Carousel:
+            # the four slides
+            Image:
+                source: 'assets/screenshots/settings.png'
+            Image:
+                source: 'assets/screenshots/race_bets.png'
+            Image:
+                source: 'assets/screenshots/race_results.png'
+            Image:
+                source: 'assets/screenshots/gameover.png'
+
+        RedButton:
+            text: 'Back'
+
+            # Let's go back to the Race screen.
+            on_press: root.manager.current = 'racescreen'
