@@ -1,0 +1,48 @@
+#:kivy 1.11.1
+# File name: slug.kv
+#:import slug slug
+
+<Slug>:
+    pos_hint: {'x': self.start_position, 'center_y': root.y_position}
+    size_hint: None, None
+    size: 143, 30
+    body: _body
+    left_eye: _left_eye
+    right_eye: _right_eye
+
+    # the body image
+    Image:
+        id: _body
+        source: 'atlas://assets/slugs/slugs/' + root.body_image if root.body_image else None
+
+    # the left eye image    
+    Image:
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: root.rot_angle
+                axis: 0, 0, 1
+                origin: self.x, self.center_y
+        canvas.after:
+            PopMatrix 
+
+        id: _left_eye
+        source: 'atlas://assets/slugs/slugs/' + root.eye_image if root.eye_image else None
+        pos_hint: {'x': .95, 'y': .45}
+        size_hint: 0.25, 0.25
+
+    # the right eye image
+    Image:
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: -root.rot_angle
+                axis: 0, 0, 1
+                origin: self.x, self.center_y
+        canvas.after:
+            PopMatrix
+
+        id: _right_eye
+        source: 'atlas://assets/slugs/slugs/' + root.eye_image if root.eye_image else None
+        pos_hint: {'x': .95, 'y': .3}
+        size_hint: 0.25, 0.25
