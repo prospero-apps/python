@@ -1,0 +1,139 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:
+    canvas:
+        # (1) - context instruction - red color
+        Color:
+            rgba: 1, 0, 0, 1  
+
+        # (2) - vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (3) context instruction - translating by 400 px to the right
+        Translate:
+            x: 400
+
+        # (4) context instruction - green color
+        Color:
+            rgba: 0, 1, 0, 1  
+
+        # (5) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (6) context instruction - translating by 
+        # 500 px to the right and 250 px up
+        Translate:
+            xy: 500, 250        
+
+        # (7) context instruction - blue color
+        Color:
+            rgba: 0, 0, 1, 1  
+
+        # (8) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (9) context instruction - rotating 90 degrees 
+        # in counterclockwise direction on the Z axis
+        Rotate:
+            angle: 90
+            axis: 0, 0, 1
+
+        # (10) context instruction - yellow color
+        Color:
+            rgba: 1, 1, 0, 1  
+
+        # (11) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (12) context instruction - translating 
+        # by 200 px on the X axis
+        Translate:
+            x: 200
+
+        # (13) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (14) context instruction - rotating 180 degrees 
+        # on the Z axis around the point (0, 400)
+        Rotate:
+            angle: 180
+            axis: 0, 0, 1
+            origin: 0, 400
+
+        # (15) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (16) context instruction - scaling down on the X axis
+        Scale:
+            xyz: .5, 1, 1
+
+        # (17) context instruction – light blue color
+        Color:
+            rgba: 0, 1, 1, 1  
+
+        # (18) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (19) context instruction - scaling down on the Y axis
+        # relative to the point (0, 200)
+        Scale:
+            xyz: 1, .5, 1
+            origin: 0, 200
+
+        # (20) context instruction - purple color
+        Color:
+            rgba: 1, 0, 1, 1  
+
+        # (21) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (22) context instruction - flipping vertically
+        Scale:
+            xyz: -1, 1, 1
+
+        # (23) context instruction - greenish color
+        Color:
+            rgba: .5, 1, .5, 1  
+
+        # (24) vertex instruction - draw triangle            
+        Triangle:
+            points: 0, 0, 0, 400, 200, 0
+
+        # (25) context instruction - scaling on the 
+        # X and Y axes and flipping horizontally
+        Scale:
+            xyz: 2, -2, 0
+
+        # (26) context instruction - rotating 
+        # 90 degrees in clockwise direction                    
+        Rotate:
+            angle: -90
+            axis: 0, 0, 1
+        
+        # (27) context instruction - translating 
+        # 200 px to the left and 450 px down
+        Translate:
+            xy: -200, -450
+
+    # label with a gray rectangle
+    Label:
+        canvas.before:
+            Color:
+                rgba: .5, .5, .5, .9              
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+        text: 'LABEL'         
+        size_hint: None, None
+        size: 200, 100
+        font_size: 70

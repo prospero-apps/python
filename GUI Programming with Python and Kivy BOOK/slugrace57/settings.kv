@@ -1,0 +1,249 @@
+#:kivy 1.11.1
+# File name: settings.kv
+
+### LABELS ###
+<RegularLabel@Label>:
+    color: .2, .1, 0, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+
+<TitleLabel@RegularLabel>:
+    font_size: 20
+    size_hint: (1, None)
+    height: 30
+
+<Regular80x30Label@RegularLabel>:
+    size_hint: None, None
+    size: 80, 30
+
+<DollarLabel@RegularLabel>:
+    text: "$"
+    size_hint: None, None
+    size: 20, 30 
+
+### TEXT INPUTS ###
+<NameInput@TextInput>:
+    multiline: False
+    size_hint: None, None
+    size: 400, 30
+    
+<NumInput@TextInput>:
+    multiline: False
+    size_hint: None, None
+    size: 250, 30
+
+### CHECK BOXES ###
+# PlayerRadioButton inherits from CheckBox.
+<PlayerRadioButton@CheckBox>:
+    group: 'players'  
+    size_hint: (.5, 1)
+
+# ConditionRadioButton inherits from CheckBox.
+<ConditionRadioButton@CheckBox>:
+    group: 'conditions'
+    size_hint_x: .05
+
+<SettingsScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+    
+    ### SETTINGS LABEL ###
+    TitleLabel:
+        text: 'Settings'
+        font_size: 28
+
+    ### THE PLAYERS ###  
+    BoxLayout:
+        canvas:
+            Color:
+                rgba: .2, .1, 0, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, 10
+                width: 2
+
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+        
+        # Title         
+        TitleLabel:
+            text: 'The Players'
+
+        # Radio Buttons 
+        BoxLayout:
+            size_hint: (.4, None)
+            height: 50
+            
+            # 1 player
+            BoxLayout:
+                PlayerRadioButton:
+                RegularLabel:
+                    text: '1 player'
+
+            # 2 players
+            BoxLayout:
+                PlayerRadioButton:
+                RegularLabel:
+                    text: '2 players'
+
+            # 3 players
+            BoxLayout:
+                PlayerRadioButton:
+                RegularLabel:
+                    text: '3 players'
+
+            # 4 players
+            BoxLayout:
+                PlayerRadioButton:
+                RegularLabel:
+                    text: '4 players'
+
+        # Player Name and Initial Money Setup 
+        BoxLayout:
+            orientation: 'vertical'
+
+            # the headers row
+            BoxLayout:
+                RegularLabel:
+                    text: "" 
+                    size_hint_x: None                
+                    width: 80
+
+                # name header
+                RegularLabel:
+                    text: "Name"
+                    size_hint_x: None                
+                    width: 700
+
+                # money header
+                RegularLabel:
+                    text: "Initial Money"
+
+            # the players rows
+            # player 1
+            BoxLayout:
+                Regular80x30Label:
+                    text: 'Player 1'
+                
+                NameInput:
+
+                BoxLayout:
+                    RegularLabel:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+                                      
+                    DollarLabel:
+
+                    NumInput:
+
+            # player 2
+            BoxLayout:
+                Regular80x30Label:
+                    text: 'Player 2'
+
+                NameInput:
+
+                BoxLayout:
+                    RegularLabel:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    DollarLabel:
+
+                    NumInput:
+
+            # player 3
+            BoxLayout:
+                Regular80x30Label:
+                    text: 'Player 3'
+
+                NameInput:
+
+                BoxLayout:
+                    RegularLabel:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    DollarLabel:
+
+                    NumInput:
+
+            # player 4
+            BoxLayout:
+                Regular80x30Label:
+                    text: 'Player 4'
+
+                NameInput:
+
+                BoxLayout:
+                    RegularLabel:
+                        text: ""
+                        size_hint_x: None                
+                        width: 280
+
+                    DollarLabel:
+
+                    NumInput:       
+
+    ### ENDING CONDITIONS ###
+    BoxLayout:
+        canvas:
+            Color:
+                rgba: .2, .1, 0, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, 10
+                width: 2
+
+        orientation: 'vertical' 
+        size_hint: (1, .4) 
+        padding: 10
+        spacing: 10    
+
+        # title label
+        TitleLabel:
+            text: "Ending Conditions"
+
+        # radio buttons
+        GridLayout:
+            rows: 3
+            spacing: 10
+
+            # option 1: money
+            ConditionRadioButton:
+            RegularLabel:
+                text: "The game is over when there is only one player with any money left."
+
+            # option 2: races
+            ConditionRadioButton:
+            BoxLayout:                
+                RegularLabel:
+                    text: "The game is over not later than after a given number of races."
+
+                NumInput:
+
+            # option 3: time
+            ConditionRadioButton:
+            BoxLayout:                
+                RegularLabel:
+                    text: "The game is over not later than the total racing time has elapsed."
+
+                NumInput:
+
+    ### READY BUTTON ###
+    Button:
+        text: 'Ready'
+        size_hint: (None, None)        
+        size: 200, 40
+        pos_hint: {'center_x': 0.5}
