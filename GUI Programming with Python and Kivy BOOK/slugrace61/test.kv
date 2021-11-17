@@ -1,0 +1,31 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<TestLayout>:    
+    canvas:
+        # red     
+        Color:
+            rgba: 1, 0, 0, 1
+
+        Rectangle:
+            pos: 100, 100
+            size: 400, 100
+            source: 'assets/racetrack.png'
+
+        # green
+        Color:
+            rgba: 0, 1, 0, 1
+
+        Rectangle:
+            pos: 800, 100
+            size: 350, 350
+            source: 'assets/racetrack.png'
+
+        # blue
+        Color:
+            rgba: 0, 0, 1, 1
+
+        Ellipse:
+            pos: 200, 400
+            size: 600, 250
+            source: 'assets/racetrack.png'

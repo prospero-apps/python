@@ -1,0 +1,507 @@
+#:kivy 1.11.1
+# File name: race.kv
+
+### CLASS RULES ###
+
+<RegularLabel@Label>:
+    color: .2, .1, 0, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+
+<BoldLabel@RegularLabel>:    
+    bold: True
+
+<WhiteOddsLabel@BoldLabel>:
+    font_size: 32
+    color: 1, 1, 1, 1    
+
+<WhiteNameLabel@BoldLabel>:
+    font_size: 18 
+    color: 1, 1, 1, 1       
+
+<WhiteWinsLabel@BoldLabel>:
+    font_size: 14   
+    color: 1, 1, 1, 1
+
+<RedButton@Button>:
+    background_color: .8, 0, 0, 1
+    color: 1, .8, .1, 1
+    bold: True
+    font_size: 18
+    size_hint: (None, None)    
+    size: 200, 40
+    pos_hint: {'center_x': 0.5}
+
+<RaceScreen>:
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+    
+    ### INFO, STATS AND BUTTONS ###
+    GridLayout:
+        cols: 4
+        size_hint: 1, .5
+        spacing: 10
+
+        # Game Info
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+
+            orientation: 'vertical'
+            padding: 10
+
+            BoldLabel:
+                text: 'Game Info:'
+            BoxLayout:                    
+                RegularLabel:
+                    size_hint: (2.5, 1)
+                    text: 'Race No'
+                RegularLabel: 
+                    text: '1'            
+            BoxLayout:                                                      
+                RegularLabel: 
+                    size_hint: (2.5, 1)                        
+                    text: 'Number of races set:' 
+                RegularLabel:
+                    text: '10'                        
+            BoxLayout:
+                RegularLabel: 
+                    size_hint: (2.5, 1)
+                    text: 'Races finished:' 
+                RegularLabel:
+                    text: '0'          
+            BoxLayout:
+                RegularLabel:
+                    size_hint: (2.5, 1)
+                    text: 'Races to go:' 
+                RegularLabel:
+                    text: '10'
+
+        # Slugs' Stats           
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+
+            orientation: 'vertical'
+            padding: 10
+
+            BoldLabel:
+                text: "Slugs' Stats"
+            
+            BoxLayout:
+                spacing: 10
+                RegularLabel:
+                    text: "Speedster"
+                RegularLabel:
+                    text: '7 wins'
+                RegularLabel:   
+                    text: '70%'
+                    
+            BoxLayout:
+                spacing: 10
+                RegularLabel:
+                    text: "Trusty"
+                RegularLabel:
+                    text: '1 win'
+                RegularLabel:   
+                    text: '10%'
+            
+            BoxLayout:
+                spacing: 10
+                RegularLabel:
+                    text: "Iffy"
+                RegularLabel:
+                    text: '0 wins'
+                RegularLabel:   
+                    text: '0%'
+            
+            BoxLayout:
+                spacing: 10
+                RegularLabel:
+                    text: "Slowpoke"
+                RegularLabel:
+                    text: '2 wins'
+                RegularLabel:   
+                    text: '20%'
+
+        # Players' Stats           
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: .2, .1, 0, 1
+                Line:
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                    width: 2
+
+            orientation: 'vertical'
+            padding: 10
+
+            BoldLabel:
+                text: "Players' Stats"                                
+
+            BoxLayout:                                     
+                RegularLabel:
+                    text: 'Player 1'
+                RegularLabel:
+                    text: 'has $1000' 
+
+            BoxLayout:  
+                RegularLabel:
+                    text: 'Player 2'
+                RegularLabel:
+                    text: 'has $800'
+
+            BoxLayout: 
+                RegularLabel:
+                    text: 'Player 3'
+                RegularLabel:
+                    text: 'has $1300'
+
+            BoxLayout:  
+                RegularLabel:
+                    text: 'Player 4'
+                RegularLabel:
+                    text: 'has $1200'
+
+        # Buttons
+        BoxLayout:
+            orientation: 'vertical'   
+            spacing: 3 
+            size_hint: .7, 1               
+            
+            RedButton:
+                text: 'End Game'  
+                pos_hint: {'right': 1}
+
+            RedButton:
+                text: 'Instructions'   
+                pos_hint: {'right': 1}
+            
+            RedButton: 
+                text: 'Sound'
+                pos_hint: {'right': 1}
+                size: 70, 40
+    
+    ### THE TRACK ###
+    BoxLayout:  
+        canvas:
+            Color:
+                rgba: .2, .1, 0, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                width: 2
+      
+        padding: 10
+
+        # Track Image
+        RelativeLayout:
+            size_hint: None, None
+            size: 1000, 200
+            pos_hint: {'center_y': .5}    
+            Image:
+                source: 'assets/racetrack.png'
+
+            # white labels with slug info            
+            # Speedster
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                size: 100, 50
+                pos_hint: {'x': .004, 'center_y': .875}
+
+                WhiteNameLabel:
+                    text: 'Speedster'                 
+
+                WhiteWinsLabel:
+                    text: '0 wins' 
+
+            # Trusty
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                size: 100, 50
+                pos_hint: {'x': .004, 'center_y': .625}
+
+                WhiteNameLabel:
+                    text: 'Trusty'                 
+
+                WhiteWinsLabel:
+                    text: '0 wins'  
+
+            # Iffy
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                size: 100, 50
+                pos_hint: {'x': .004, 'center_y': .375}
+
+                WhiteNameLabel:
+                    text: 'Iffy'                 
+
+                WhiteWinsLabel:
+                    text: '0 wins'               
+            
+            # Slowpoke
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                size: 100, 50
+                pos_hint: {'x': .004, 'center_y': .125}
+
+                WhiteNameLabel:
+                    text: 'Slowpoke'                 
+
+                WhiteWinsLabel:
+                    text: '0 wins'   
+
+            # the odds labels
+            # Speedster
+            WhiteOddsLabel:
+                text: '1.42'                
+                pos_hint: {'x': .77, 'center_y': .875}
+
+            # Trusty
+            WhiteOddsLabel:
+                text: '1.61'                
+                pos_hint: {'x': .77, 'center_y': .625}
+
+            # Iffy
+            WhiteOddsLabel:
+                text: '2.53'                
+                pos_hint: {'x': .77, 'center_y': .375}
+
+            # Slowpoke
+            WhiteOddsLabel:
+                text: '2.89'                
+                pos_hint: {'x': .77, 'center_y': .125}  
+
+            # slug images
+            # Speedster 
+
+            # By putting the body image and two instances of the eye
+            # image in a RelativeLayout, we will be able to position 
+            # the eyes relative to the body easily.
+            # The exact values that I'm using in the size and pos_hint
+            # properties were determined by trial and error and just
+            # seem to be working fine for our purposes.
+            RelativeLayout:
+                pos_hint: {'x': .09, 'center_y': .875}
+                size_hint: None, None
+                size: 143, 30
+
+                # the body image
+                Image:
+                    source: 'assets/slugs/speedsterBody.png'
+                    
+                # the left eye image
+                Image:
+                    canvas.before:
+                        # Let's save the context before rotation.
+                        PushMatrix
+
+                        # Let's rotate the eye 30 degrees counterclockwise
+                        # on the Z axis around the point which is horizontally
+                        # on the left border of the eye image and vertically
+                        # halfway its height.
+                        Rotate:
+                            angle: 30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        # Let's restore the context.
+                        PopMatrix                    
+
+                    source: 'assets/slugs/speedsterEye.png'
+
+                    # The position of the eye is relative to the RelativeLayout
+                    # it's in along with the body image and the other eye image.
+                    pos_hint: {'x': .95, 'y': .45}
+
+                    # Let's scale the eye image down so that it looks well-proportioned.
+                    size_hint: 0.25, 0.25
+
+                # the right eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: -30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/speedsterEye.png'
+                    pos_hint: {'x': .95, 'y': .3}
+                    size_hint: 0.25, 0.25
+
+            # Trusty
+            RelativeLayout:
+                pos_hint: {'x': .09, 'center_y': .625}
+                size_hint: None, None
+                size: 143, 30
+
+                # the body image
+                Image:
+                    source: 'assets/slugs/trustyBody.png'
+
+                # the left eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: 30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/trustyEye.png'
+                    pos_hint: {'x': .95, 'y': .45}
+                    size_hint: 0.25, 0.25
+
+                # the right eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: -30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/trustyEye.png'
+                    pos_hint: {'x': .95, 'y': .3}
+                    size_hint: 0.25, 0.25
+
+            # Iffy 
+            RelativeLayout:
+                pos_hint: {'x': .09, 'center_y': .375}
+                size_hint: None, None
+                size: 143, 30
+
+                # the body image
+                Image:
+                    source: 'assets/slugs/iffyBody.png'
+
+                # the left eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: 30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/iffyEye.png'
+                    pos_hint: {'x': .95, 'y': .45}
+                    size_hint: 0.25, 0.25
+
+                # the right eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: -30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/iffyEye.png'
+                    pos_hint: {'x': .95, 'y': .3}
+                    size_hint: 0.25, 0.25
+
+            # Slowpoke 
+            RelativeLayout:
+                pos_hint: {'x': .09, 'center_y': .125}
+                size_hint: None, None
+                size: 143, 30
+
+                # the body image
+                Image:
+                    source: 'assets/slugs/slowpokeBody.png'
+
+                # the left eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: 30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/slowpokeEye.png'
+                    pos_hint: {'x': .95, 'y': .45}
+                    size_hint: 0.25, 0.25
+
+                # the right eye image
+                Image:
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: -30
+                            axis: 0, 0, 1
+                            origin: self.x, self.center_y
+                    canvas.after:
+                        PopMatrix
+
+                    source: 'assets/slugs/slowpokeEye.png'
+                    pos_hint: {'x': .95, 'y': .3}
+                    size_hint: 0.25, 0.25
+
+        # Winner
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (.18, 1)
+
+            Label:
+                color: .2, .1, 0, 1
+                text: "The winner is"
+                font_size: 24
+                size_hint: 1, .2
+                bold: True
+
+            Label:
+                color: .2, .1, 0, 1
+                text: "Trusty"
+                font_size: 32
+                size_hint: 1, .2
+                bold: True
+
+            Image:
+                source: 'assets/silhouettes/Trusty.png'
+    
+    ### THE BETS ###
+    Label:
+        canvas:
+            Color:
+                rgba: .2, .1, 0, 1
+            Line:
+                rounded_rectangle: self.x, self.y, self.width, self.height, 10        
+                width: 2
+
+        color: .2, .1, 0, 1
+        text: 'The Bets'
