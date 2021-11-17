@@ -1,0 +1,14 @@
+#:kivy 1.11.1
+# File name: test.kv
+
+<CustomButton>:
+    font_size: 50   
+    size_hint_x: .5
+    text: 'You are safe.'
+
+    # When a button is pressed, a new enemy is appended. 
+    on_press: self.enemies.append('enemy')
+
+<TestLayout>:
+    CustomButton:
+    CustomButton:

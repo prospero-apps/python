@@ -1,0 +1,109 @@
+#:kivy 1.11.1
+# File name: results.kv
+#:import results results
+
+<Result>:                        
+    RegularLabel:
+        text: root.player_name
+    BoxLayout:                                
+        RegularLabel:                    
+            text: 'had'
+            size_hint: (.4, 1)
+        RegularLabel: 
+            text: '$' + str(root.money_before)                        
+    BoxLayout:                
+        RegularLabel:                    
+            text: 'bet'
+            size_hint: (.4, 1)   
+        RegularLabel:     
+            text: '$' + str(root.bet_amount)                                                     
+    RegularLabel:
+        text: 'on ' + root.slug_name         
+    BoxLayout:
+        RegularLabel:
+            text: root.result_info 
+            size_hint: (.5, 1)
+        RegularLabel: 
+            text: '$' + str(root.gain_or_loss) 
+    BoxLayout:
+        RegularLabel:
+            text: 'now has'                    
+        RegularLabel: 
+            text: '$' + str(root.current_money) 
+    RegularLabel:
+        text: 'The odds were ' + str(root.odds)
+
+<ResultsScreen>: 
+    canvas:
+        Color:
+            rgba: 1, 1, .8, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size 
+
+    game: root.manager.parent.parent.parent.manager
+                  
+    BoxLayout:                     
+        orientation: 'vertical'
+        padding: 10    
+        
+        ### TITLE LABEL ###
+        BoldLabel:  
+            text: 'Race 1 Results' 
+            size_hint: (1, None)
+            height: 30
+
+        ### PLAYER RESULTS ###   
+        BoxLayout:
+            orientation: 'vertical'
+
+            # player 1
+            Result:
+                player_name: 'Player 1'
+                money_before: 1000
+                bet_amount: 300
+                slug_name: 'Speedster'
+                result_info: '- won'
+                gain_or_loss: 400
+                current_money: 1400
+                odds: 2.54
+
+            # player 2
+            Result:
+                player_name: 'Player 2'
+                money_before: 1000
+                bet_amount: 300
+                slug_name: 'Speedster'
+                result_info: '- lost'
+                gain_or_loss: 400
+                current_money: 600
+                odds: 1.59
+
+            # player 3
+            Result:
+                player_name: 'Player 3'
+                money_before: 1000
+                bet_amount: 300
+                slug_name: 'Trusty'
+                result_info: '- won'
+                gain_or_loss: 400
+                current_money: 1400
+                odds: 2.24
+
+            # player 4
+            Result:
+                player_name: 'Player 4'
+                money_before: 1000
+                bet_amount: 300
+                slug_name: 'Speedster'
+                result_info: '- lost'
+                gain_or_loss: 400
+                current_money: 600
+                odds: 1.85
+                
+        ### NEXT RACE BUTTON ###  
+        RedButton:
+            text: 'Next Race'
+            on_press: 
+                root.manager.current = 'betsscreen'
+                root.manager.transition.direction = 'right'
